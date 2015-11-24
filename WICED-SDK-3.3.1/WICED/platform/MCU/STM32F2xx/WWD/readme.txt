@@ -1,0 +1,1 @@
+Change the SDIO clock pre-scaler from 0 to 6 in SDIO high speed mode
