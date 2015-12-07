@@ -66,21 +66,21 @@ void application_start( )
 
     if(WICED_TRUE == wiced_gpio_input_get(SETUP_BUTTON))
     {
-    	WPRINT_APP_INFO( ( "The user LED are flashing.\n" ) );
+        WPRINT_APP_INFO( ( "The user LED are flashing.\n" ) );
 
-    	wiced_gpio_init(USER_LED, OUTPUT_PUSH_PULL);
+        wiced_gpio_init(USER_LED, OUTPUT_PUSH_PULL);
 
-    	while ( 1 )
+        while ( 1 )
     	{
-    		wiced_gpio_output_low( USER_LED );
-    		wiced_rtos_delay_milliseconds( 300 );
+            wiced_gpio_output_low( USER_LED );
+            wiced_rtos_delay_milliseconds( 300 );
 
-    		wiced_gpio_output_high( USER_LED );
-    		wiced_rtos_delay_milliseconds( 300 );
-    	}
+            wiced_gpio_output_high( USER_LED );
+            wiced_rtos_delay_milliseconds( 300 );
+        }
     }
     else
     {
-    	WPRINT_APP_INFO( ( "The user LED are not flashing.\n" ) );
+        WPRINT_APP_INFO( ( "The user LED are not flashing.\n" ) );
     }
 }

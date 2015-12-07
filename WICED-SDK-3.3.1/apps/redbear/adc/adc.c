@@ -63,15 +63,15 @@ void application_start( )
 
     while ( 1 )
     {
-    	WPRINT_APP_INFO( ( "Analog input voltage measurement:\n" ) );
+        WPRINT_APP_INFO( ( "Analog input voltage measurement:\n" ) );
 		
-    	for(uint8_t i=0; i<8; i++)
-    	{
-    		wiced_adc_init( analog_channel[i], 480 );
-    		// This function only takes sample for the channel that selected by the last time invoking wiced_adc_init().
-    		// So if you change to take sample for another channel, you need to invoke wiced_adc_init() to select this channel first.
-			wiced_adc_take_sample( analog_channel[i], &analog_value[i] );
-			WPRINT_APP_INFO( ( "Channel %d input voltage: %d\n", i, analog_value[i] ) );
+        for(uint8_t i=0; i<8; i++)
+        {
+            wiced_adc_init( analog_channel[i], 480 );
+            // This function only takes sample for the channel that selected by the last time invoking wiced_adc_init().
+            // So if you change to take sample for another channel, you need to invoke wiced_adc_init() to select this channel first.
+            wiced_adc_take_sample( analog_channel[i], &analog_value[i] );
+            WPRINT_APP_INFO( ( "Channel %d input voltage: %d\n", i, analog_value[i] ) );
     	}
 
         wiced_rtos_delay_milliseconds( 3000 );

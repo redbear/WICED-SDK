@@ -148,12 +148,12 @@ unsigned char BasicFont[][8] =
 
 void SeeedGrayOled_init(void)
 {
-	/* Initialise I2C to drive the OLED 96*96 */
-	wiced_i2c_init( &i2c_dev );
+    /* Initialise I2C to drive the OLED 96*96 */
+    wiced_i2c_init( &i2c_dev );
 
-	wiced_rtos_delay_milliseconds(50);
+    wiced_rtos_delay_milliseconds(50);
 
-	SeeedGrayOled_sendCommand(0xFD); // Unlock OLED driver IC MCU interface from entering command. i.e: Accept commands
+    SeeedGrayOled_sendCommand(0xFD); // Unlock OLED driver IC MCU interface from entering command. i.e: Accept commands
     SeeedGrayOled_sendCommand(0x12);
     SeeedGrayOled_sendCommand(0xAE); // Set display off
     SeeedGrayOled_sendCommand(0xA8); // set multiplex ratio
@@ -204,21 +204,21 @@ void SeeedGrayOled_init(void)
 
 void SeeedGrayOled_sendCommand(unsigned char command)
 {
-	temp_data[0] = SeeedGrayOLED_Command_Mode;
-	temp_data[1] = command;
-	wiced_i2c_init_tx_message( &i2c_tx_msg, temp_data, 2, 1, WICED_TRUE );
-	wiced_i2c_transfer( &i2c_dev, &i2c_tx_msg, 1 );
+    temp_data[0] = SeeedGrayOLED_Command_Mode;
+    temp_data[1] = command;
+    wiced_i2c_init_tx_message( &i2c_tx_msg, temp_data, 2, 1, WICED_TRUE );
+    wiced_i2c_transfer( &i2c_dev, &i2c_tx_msg, 1 );
 }
 
 void SeeedGrayOled_setContrastLevel(unsigned char ContrastLevel)
 {
-	SeeedGrayOled_sendCommand(SeeedGrayOLED_Set_ContrastLevel_Cmd);
-	SeeedGrayOled_sendCommand(ContrastLevel);
+    SeeedGrayOled_sendCommand(SeeedGrayOLED_Set_ContrastLevel_Cmd);
+    SeeedGrayOled_sendCommand(ContrastLevel);
 }
 
 void SeeedGrayOled_setHorizontalMode()
 {
-	SeeedGrayOled_sendCommand(0xA0); // remap to
+    SeeedGrayOled_sendCommand(0xA0); // remap to
     SeeedGrayOled_sendCommand(0x42); // horizontal mode
 
     // Row Address
@@ -234,20 +234,20 @@ void SeeedGrayOled_setHorizontalMode()
 
 void SeeedGrayOled_setVerticalMode()
 {
-	SeeedGrayOled_sendCommand(0xA0); // remap to
+    SeeedGrayOled_sendCommand(0xA0); // remap to
     SeeedGrayOled_sendCommand(0x46); // Vertical mode
 }
 
 void SeeedGrayOled_setTextXY(unsigned char Row, unsigned char Column)
 {
     //Column Address
-	SeeedGrayOled_sendCommand(0x15);             /* Set Column Address */
-	SeeedGrayOled_sendCommand(0x08+(Column*4));  /* Start Column: Start from 8 */
-	SeeedGrayOled_sendCommand(0x37);             /* End Column */
+    SeeedGrayOled_sendCommand(0x15);             /* Set Column Address */
+    SeeedGrayOled_sendCommand(0x08+(Column*4));  /* Start Column: Start from 8 */
+    SeeedGrayOled_sendCommand(0x37);             /* End Column */
     // Row Address
-	SeeedGrayOled_sendCommand(0x75);             /* Set Row Address */
-	SeeedGrayOled_sendCommand(0x00+(Row*8));     /* Start Row*/
-	SeeedGrayOled_sendCommand(0x07+(Row*8));     /* End Row*/
+    SeeedGrayOled_sendCommand(0x75);             /* Set Row Address */
+    SeeedGrayOled_sendCommand(0x00+(Row*8));     /* Start Row*/
+    SeeedGrayOled_sendCommand(0x07+(Row*8));     /* End Row*/
 }
 
 void SeeedGrayOled_clearDisplay()
@@ -257,18 +257,17 @@ void SeeedGrayOled_clearDisplay()
     {
         for(i=0; i<96; i++)  //clear all columns
         {
-        	SeeedGrayOled_sendData(0x00);
+            SeeedGrayOled_sendData(0x00);
         }
     }
-
 }
 
 void SeeedGrayOled_sendData(unsigned char Data)
 {
-	temp_data[0] = SeeedGrayOLED_Data_Mode;
-	temp_data[1] = Data;
-	wiced_i2c_init_tx_message( &i2c_tx_msg, temp_data, sizeof(temp_data), 1, WICED_TRUE );
-	wiced_i2c_transfer( &i2c_dev, &i2c_tx_msg, 1 );
+    temp_data[0] = SeeedGrayOLED_Data_Mode;
+    temp_data[1] = Data;
+    wiced_i2c_init_tx_message( &i2c_tx_msg, temp_data, sizeof(temp_data), 1, WICED_TRUE );
+    wiced_i2c_transfer( &i2c_dev, &i2c_tx_msg, 1 );
 }
 
 void SeeedGrayOled_setGrayLevel(unsigned char grayLevel)
@@ -345,8 +344,6 @@ unsigned char SeeedGrayOled_putNumber(long long_num)
 
 }
 
-
-
 void SeeedGrayOled_drawBitmap(unsigned char *bitmaparray, int bytes)
 {
     char localAddressMode = addressingMode;
@@ -359,25 +356,24 @@ void SeeedGrayOled_drawBitmap(unsigned char *bitmaparray, int bytes)
     for(int i=0;i<bytes;i++)
     {
 
-    for(int j=0; j<8; j=j+2)
-    {
-        char c = 0x00;
-        char bit1 = bitmaparray[i] << j  & 0x80;
-        char bit2 = bitmaparray[i] << (j+1) & 0x80;
+        for(int j=0; j<8; j=j+2)
+        {
+            char c = 0x00;
+            char bit1 = bitmaparray[i] << j  & 0x80;
+            char bit2 = bitmaparray[i] << (j+1) & 0x80;
 
-        // Each bit is changed to a nibble
-        c |= (bit1)?grayH:0x00;
-        // Each bit is changed to a nibble
-        c |= (bit2)?grayL:0x00;
-        SeeedGrayOled_sendData(c);
-     }
+            // Each bit is changed to a nibble
+            c |= (bit1)?grayH:0x00;
+            // Each bit is changed to a nibble
+            c |= (bit2)?grayL:0x00;
+            SeeedGrayOled_sendData(c);
+        }
     }
     if(localAddressMode == VERTICAL_MODE)
     {
         //If Vertical Mode was used earlier, restore it.
     	SeeedGrayOled_setVerticalMode();
     }
-
 }
 
 void SeeedGrayOled_setHorizontalScrollProperties(wiced_bool_t direction,unsigned char startRow, unsigned char endRow,unsigned char startColumn, unsigned char endColumn, unsigned char scrollSpeed)
@@ -423,22 +419,22 @@ Use the following defines for 'scrollSpeed' :
 
 void SeeedGrayOled_activateScroll()
 {
-	SeeedGrayOled_sendCommand(SeeedGrayOLED_Activate_Scroll_Cmd);
+    SeeedGrayOled_sendCommand(SeeedGrayOLED_Activate_Scroll_Cmd);
 }
 
 void SeeedGrayOled_deactivateScroll()
 {
-	SeeedGrayOled_sendCommand(SeeedGrayOLED_Dectivate_Scroll_Cmd);
+    SeeedGrayOled_sendCommand(SeeedGrayOLED_Dectivate_Scroll_Cmd);
 }
 
 void SeeedGrayOled_setNormalDisplay()
 {
-	SeeedGrayOled_sendCommand(SeeedGrayOLED_Normal_Display_Cmd);
+    SeeedGrayOled_sendCommand(SeeedGrayOLED_Normal_Display_Cmd);
 }
 
 void SeeedGrayOled_setInverseDisplay()
 {
-	SeeedGrayOled_sendCommand(SeeedGrayOLED_Inverse_Display_Cmd);
+    SeeedGrayOled_sendCommand(SeeedGrayOLED_Inverse_Display_Cmd);
 }
 
 

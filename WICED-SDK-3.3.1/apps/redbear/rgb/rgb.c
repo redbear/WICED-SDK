@@ -74,18 +74,18 @@ void application_start( )
         if ( button_pressed == WICED_TRUE )
         {
             /* Flashing white */
-        	if( (led_state%2) == 0 )
-        	{
-				wiced_gpio_output_low( RGB_R );
-				wiced_gpio_output_low( RGB_G );
-				wiced_gpio_output_low( RGB_B );
-        	}
-        	else
-        	{
-        		wiced_gpio_output_high( RGB_R );
-				wiced_gpio_output_high( RGB_G );
-				wiced_gpio_output_high( RGB_B );
-        	}
+            if( (led_state%2) == 0 )
+            {
+                wiced_gpio_output_low( RGB_R );
+			    wiced_gpio_output_low( RGB_G );
+			    wiced_gpio_output_low( RGB_B );
+            }
+            else
+            {
+        	    wiced_gpio_output_high( RGB_R );
+			    wiced_gpio_output_high( RGB_G );
+			    wiced_gpio_output_high( RGB_B );
+            }
         }
         else
         {
@@ -104,9 +104,9 @@ void application_start( )
             }
             else
             {
-            	wiced_gpio_output_high( RGB_R );
-				wiced_gpio_output_high( RGB_G );
-				wiced_gpio_output_low( RGB_B );
+                wiced_gpio_output_high( RGB_R );
+                wiced_gpio_output_high( RGB_G );
+                wiced_gpio_output_low( RGB_B );
             }
         }
 

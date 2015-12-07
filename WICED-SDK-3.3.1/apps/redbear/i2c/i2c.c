@@ -64,15 +64,15 @@ void application_start( )
     WPRINT_APP_INFO( ( "I2C API demonstration.\n" ) );
 
     SeeedGrayOled_init();             // initialize SEEED OLED display
-	SeeedGrayOled_clearDisplay();     // Clear Display
-	SeeedGrayOled_setNormalDisplay(); // Set Normal Display Mode
-	SeeedGrayOled_setVerticalMode();  // Set to vertical mode for displaying text
-	SeeedGrayOled_setGrayLevel(15);   // Set Grayscale level. Any number between 0 - 15.
+    SeeedGrayOled_clearDisplay();     // Clear Display
+    SeeedGrayOled_setNormalDisplay(); // Set Normal Display Mode
+    SeeedGrayOled_setVerticalMode();  // Set to vertical mode for displaying text
+    SeeedGrayOled_setGrayLevel(15);   // Set Grayscale level. Any number between 0 - 15.
 
-	SeeedGrayOled_setTextXY(3,0);
-	SeeedGrayOled_putString("  HELLO     ");
-	SeeedGrayOled_setTextXY(6,0);
-	SeeedGrayOled_putString("      MAKER ");
-	SeeedGrayOled_setTextXY(9,0);
-	SeeedGrayOled_putString("   (*^_^*)  ");
+    SeeedGrayOled_setTextXY(3,0);
+    SeeedGrayOled_putString("  HELLO     ");
+    SeeedGrayOled_setTextXY(6,0);
+    SeeedGrayOled_putString("      MAKER ");
+    SeeedGrayOled_setTextXY(9,0);
+    SeeedGrayOled_putString("   (*^_^*)  ");
 }

@@ -67,14 +67,14 @@ typedef enum
 
 typedef enum
 {
-	WICED_ADC_1,
-	WICED_ADC_2,
-	WICED_ADC_3,
-	WICED_ADC_4,
-	WICED_ADC_5,
-	WICED_ADC_6,
-	WICED_ADC_7,
-	WICED_ADC_8,
+    WICED_ADC_1,
+    WICED_ADC_2,
+    WICED_ADC_3,
+    WICED_ADC_4,
+    WICED_ADC_5,
+    WICED_ADC_6,
+    WICED_ADC_7,
+    WICED_ADC_8,
 
     WICED_ADC_MAX, /* Denotes the total number of ADC port aliases. Not a valid ADC alias */
     WICED_ADC_32BIT = 0x7FFFFFFF,
@@ -82,23 +82,23 @@ typedef enum
 
 typedef enum
 {
-	WICED_PWM_1,
-	WICED_PWM_2,
-	WICED_PWM_3,
-	WICED_PWM_4,
-	WICED_PWM_5,
-	WICED_PWM_6,
-	WICED_PWM_7,
-	WICED_PWM_8,
-	WICED_PWM_9,
-	WICED_PWM_10,
-	WICED_PWM_11,
-	WICED_PWM_12,
-	WICED_PWM_13,
+    WICED_PWM_1,
+    WICED_PWM_2,
+    WICED_PWM_3,
+    WICED_PWM_4,
+    WICED_PWM_5,
+    WICED_PWM_6,
+    WICED_PWM_7,
+    WICED_PWM_8,
+    WICED_PWM_9,
+    WICED_PWM_10,
+    WICED_PWM_11,
+    WICED_PWM_12,
+    WICED_PWM_13,
 
-	WICED_PWM_14,
-	WICED_PWM_15,
-	WICED_PWM_16,
+    WICED_PWM_14,
+    WICED_PWM_15,
+    WICED_PWM_16,
 
     WICED_PWM_MAX, /* Denotes the total number of PWM port aliases. Not a valid PWM alias */
     WICED_PWM_32BIT = 0x7FFFFFFF,
@@ -106,31 +106,31 @@ typedef enum
 
 typedef enum
 {
-	WICED_I2C_1,
+    WICED_I2C_1,
     WICED_I2C_MAX,
     WICED_I2C_32BIT = 0x7FFFFFFF,
 } wiced_i2c_t;
 
 typedef enum
 {
-	WICED_SPI_1,
-	WICED_SPI_2,
-	WICED_SPI_3,
+    WICED_SPI_1,
+    WICED_SPI_2,
+    WICED_SPI_3,
     WICED_SPI_MAX, /* Denotes the total number of SPI port aliases. Not a valid SPI alias */
     WICED_SPI_32BIT = 0x7FFFFFFF,
 } wiced_spi_t;
 
 typedef enum
 {
-	WICED_I2S_1,
+    WICED_I2S_1,
     WICED_I2S_MAX, /* Denotes the total number of I2S port aliases.  Not a valid I2S alias */
     WICED_I2S_32BIT = 0x7FFFFFFF
 } wiced_i2s_t;
 
 typedef enum
 {
-	WICED_UART_1,
-	WICED_UART_2,
+    WICED_UART_1,
+    WICED_UART_2,
     WICED_UART_MAX, /* Denotes the total number of UART port aliases. Not a valid UART alias */
     WICED_UART_32BIT = 0x7FFFFFFF,
 } wiced_uart_t;

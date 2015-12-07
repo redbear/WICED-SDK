@@ -25,4 +25,4 @@ VALID_PLATFORMS += BCM9WCDPLUS114 \
                    BCM9WCD1AUDIO \
                    BCM943438WLPTH_2 \
                    RB_DUO \
-				   RB_DUO_ext
+                   RB_DUO_ext

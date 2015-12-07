@@ -71,8 +71,8 @@ void application_start( )
 
     while ( 1 )
     {
-		wiced_pwm_init( RGB_G_PWM, 1000, duty );
-		wiced_pwm_start( RGB_G_PWM );
+	    wiced_pwm_init( RGB_G_PWM, 1000, duty );
+	    wiced_pwm_start( RGB_G_PWM );
 
         wiced_rtos_delay_milliseconds( 10 );
 
