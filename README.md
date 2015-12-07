@@ -58,7 +58,7 @@ To test Blutooth LE, you can use this command, it is a proximity reporter demo:
 
 "make snip.bluetooth.ble_proximity_reporter-RB_DUO JTAG=RBLINK download run"   
 or    
-"make snip.bluetooth.ble_proximity_reporter-RB_DUO_ext JTAG=RBLINK download run"
+"make snip.bluetooth.ble_proximity_reporter-RB_DUO_ext JTAG=RBLINK download download_apps run"
 
 
 ## Upload Firmware
