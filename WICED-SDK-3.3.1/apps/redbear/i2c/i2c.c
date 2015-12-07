@@ -1,26 +1,27 @@
 /*
- * Copyright 2014, Broadcom Corporation
+ * Copyright 2015, RedBear Corporation
  * All Rights Reserved.
  *
- * This is UNPUBLISHED PROPRIETARY SOURCE CODE of Broadcom Corporation;
+ * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear Corporation;
  * the contents of this file may not be disclosed to third parties, copied
  * or duplicated in any form, in whole or in part, without the prior
- * written permission of Broadcom Corporation.
+ * written permission of RedBear Corporation.
  */
 
 /** @file
  *
- * SPI Application
+ * I2C Application
  *
- * This application demonstrates how to use the WICED SPI API
- * to read and write data from/to SPI Flash
+ * This application demonstrates how to use the WICED I2C API
+ * to operate Grove OLED display 0.96"
  *
  * Features demonstrated
- *  - SPI API
+ *  - I2C API
  *
  */
 
 #include "wiced.h"
+#include "SeeedGrayOLED.h"
 
 /******************************************************
  *                      Macros
@@ -57,30 +58,21 @@
 
 void application_start( )
 {
-    wiced_spi_device_t spi_dev;
-    wiced_spi_message_segment_t spi_msg;
-    uint8_t tx_data[4] = {0x55, 0xAA, 0x5A, 0xA5};
-    uint8_t rx_data[4];
-
     /* Initialise the WICED device */
     wiced_init();
 
-    WPRINT_APP_INFO( ( "SPI API demonstration.\n" ) );
+    WPRINT_APP_INFO( ( "I2C API demonstration.\n" ) );
 
-    spi_dev.port        = SPI_3;
-    spi_dev.chip_select = D10;
-    spi_dev.speed       = 10000000;
-    spi_dev.mode        = (SPI_CLOCK_RISING_EDGE | SPI_CLOCK_IDLE_HIGH | SPI_NO_DMA | SPI_MSB_FIRST);
-    spi_dev.bits        = 8;
-    wiced_spi_init( &spi_dev );
+    SeeedGrayOled_init();             // initialize SEEED OLED display
+	SeeedGrayOled_clearDisplay();     // Clear Display
+	SeeedGrayOled_setNormalDisplay(); // Set Normal Display Mode
+	SeeedGrayOled_setVerticalMode();  // Set to vertical mode for displaying text
+	SeeedGrayOled_setGrayLevel(15);   // Set Grayscale level. Any number between 0 - 15.
 
-    while ( 1 )
-    {
-        spi_msg.tx_buffer = tx_data;
-        spi_msg.rx_buffer = rx_data;
-        spi_msg.length = sizeof(tx_data);
-        wiced_spi_transfer( &spi_dev, &spi_msg, 1 );
-
-        wiced_rtos_delay_milliseconds( 2000 );
-    }
+	SeeedGrayOled_setTextXY(3,0);
+	SeeedGrayOled_putString("  HELLO     ");
+	SeeedGrayOled_setTextXY(6,0);
+	SeeedGrayOled_putString("      MAKER ");
+	SeeedGrayOled_setTextXY(9,0);
+	SeeedGrayOled_putString("   (*^_^*)  ");
 }

@@ -1,11 +1,11 @@
 /*
- * Copyright 2014, Broadcom Corporation
+ * Copyright 2015, RedBear Corporation
  * All Rights Reserved.
  *
- * This is UNPUBLISHED PROPRIETARY SOURCE CODE of Broadcom Corporation;
+ * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear Corporation;
  * the contents of this file may not be disclosed to third parties, copied
  * or duplicated in any form, in whole or in part, without the prior
- * written permission of Broadcom Corporation.
+ * written permission of RedBear Corporation.
  */
 
 /** @file
@@ -13,7 +13,7 @@
  * NeoPixel Application
  *
  * This application demonstrates how to use the WICED GPIO API
- * to light up a  Adafruit NeoPixel RGB
+ * to light up an Adafruit NeoPixel RGB
  *
  * Features demonstrated
  *  - GPIO API
@@ -67,7 +67,7 @@ void application_start( )
 
     WPRINT_APP_INFO( ( "The color of the RGB is changing every second.\n" ) );
 
-    RGB_Init( D8 );
+    RGB_Init( D0 );
 
     while ( 1 )
     {

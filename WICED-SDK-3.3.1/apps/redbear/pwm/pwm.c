@@ -1,22 +1,22 @@
 /*
- * Copyright 2014, Broadcom Corporation
+ * Copyright 2015, RedBear Corporation
  * All Rights Reserved.
  *
- * This is UNPUBLISHED PROPRIETARY SOURCE CODE of Broadcom Corporation;
+ * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear Corporation;
  * the contents of this file may not be disclosed to third parties, copied
  * or duplicated in any form, in whole or in part, without the prior
- * written permission of Broadcom Corporation.
+ * written permission of RedBear Corporation.
  */
 
 /** @file
  *
- * Blink Application
+ * PWM Application
  *
- * This application demonstrates how to use the WICED GPIO API
- * to toggle LEDs and read button states
+ * This application demonstrates how to use the WICED PWM API
+ * to light up a RGB
  *
  * Features demonstrated
- *  - GPIO API
+ *  - PWM API
  *
  */
 
@@ -50,23 +50,60 @@
  *               Variable Definitions
  ******************************************************/
 
+
 /******************************************************
  *               Function Definitions
  ******************************************************/
 
 void application_start( )
 {
+    float temp  = 100;
+    float duty = 100;
+    float cnt = 0;
+    wiced_bool_t rise = WICED_FALSE;
+
     /* Initialise the WICED device */
     wiced_init();
+	
+	// The RGB and setup button are initialized in platform.c
 
-    WPRINT_APP_INFO( ( "The LEDs are flashing.\n" ) );
+    WPRINT_APP_INFO( ( "The RGB is breathing green.\n" ) );
 
     while ( 1 )
     {
-        wiced_gpio_output_low( LED );
-        wiced_rtos_delay_milliseconds( 200 );
+		wiced_pwm_init( RGB_G_PWM, 1000, duty );
+		wiced_pwm_start( RGB_G_PWM );
 
-        wiced_gpio_output_high( LED );
-        wiced_rtos_delay_milliseconds( 200 );
+        wiced_rtos_delay_milliseconds( 10 );
+
+        if(rise)
+        {
+            temp += cnt;
+            cnt -= 0.005;
+            if(temp >= 100.0)
+            {
+                duty = 100;
+                cnt = 0;
+                rise = WICED_FALSE;
+            }
+            else
+            {
+                duty = temp;
+            }
+        }
+        else
+        {
+            cnt += 0.005;
+            temp -= cnt;
+            if(temp <= 0.0)
+            {
+                duty = 0;
+                rise = WICED_TRUE;
+            }
+            else
+            {
+                duty = temp;
+            }
+        }
     }
 }

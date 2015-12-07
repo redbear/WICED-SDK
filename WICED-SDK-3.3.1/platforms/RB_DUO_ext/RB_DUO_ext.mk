@@ -5,11 +5,10 @@
 # This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
 # the contents of this file may not be disclosed to third parties, copied
 # or duplicated in any form, in whole or in part, without the prior
-# written permission of Broadcom Corporation.
+# written permission of RedBear Corporation.
 #
 
-# ES2 RGB has been changed
-NAME := Platform_RB_DUO_ES2
+NAME := Platform_RB_DUO_ext
 
 WLAN_CHIP            := 43438
 WLAN_CHIP_REVISION   := A1
@@ -21,7 +20,7 @@ BT_CHIP_REVISION     := A1
 BT_MODE              ?= HCI
 
 
-WIFI_FIRMWARE_IN_SPI_FLASH = NO
+WIFI_FIRMWARE_IN_SPI_FLASH = YES
 #if YES, USES_RESOURCE_FILESYSTEM also must be define in platform_config.h
 
 ifneq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
@@ -54,9 +53,6 @@ GLOBAL_INCLUDES += .
 # HSE_VALUE = STM32 crystal frequency = 26MHz (needed to make UART work correctly)
 GLOBAL_DEFINES += HSE_VALUE=26000000
 GLOBAL_DEFINES += $$(if $$(NO_CRLF_STDIO_REPLACEMENT),,CRLF_STDIO_REPLACEMENT)
-
-# For DUO_ES1 boards
-GLOBAL_DEFINES += ES2
 
 # Components
 $(NAME)_COMPONENTS += drivers/spi_flash

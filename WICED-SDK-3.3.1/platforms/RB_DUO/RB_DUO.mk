@@ -5,7 +5,7 @@
 # This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
 # the contents of this file may not be disclosed to third parties, copied
 # or duplicated in any form, in whole or in part, without the prior
-# written permission of Broadcom Corporation.
+# written permission of RedBear Corporation.
 #
 
 NAME := Platform_RB_DUO

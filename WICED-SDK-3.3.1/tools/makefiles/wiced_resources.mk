@@ -135,11 +135,11 @@ SFLASH_WRITE_LOG_FILE ?= build/sflash_write.log
 SFLASH_WRITE_OUTFILE := $(BUILD_DIR)/$(call CONV_COMP,$(subst .,/,$(SFLASH_WRITE_TARGET)))/binary/$(call CONV_COMP,$(subst .,/,$(SFLASH_WRITE_TARGET)))
 ifneq ($(VERBOSE),1)
 SFLASH_WRITE_REDIRECT	= > $(SFLASH_WRITE_LOG_FILE)
-#endif
+endif
 
 external_resource_downloader:
 	$(QUIET)$(ECHO) Building serial flash downloader
 	$(QUIET)$(ECHO_BLANK_LINE)
 	$(QUIET)$(MAKE) -r $(SILENT) -f $(SOURCE_ROOT)Makefile $(SFLASH_WRITE_TARGET) NO_BUILD_BOOTLOADER=1 -I$(OUTPUT_DIR)  SFLASH= $(SFLASH_WRITE_REDIRECT)
 
-endif
+#endif

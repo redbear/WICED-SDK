@@ -5,11 +5,11 @@
  * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
  * the contents of this file may not be disclosed to third parties, copied
  * or duplicated in any form, in whole or in part, without the prior
- * written permission of RedBearLab Corporation.
+ * written permission of RedBear Corporation.
  */
 
 /** @file
- * Defines internal configuration of the RBL205IOT board
+ * Defines internal configuration of the RedBear Duo board
  */
 #pragma once
 
@@ -110,7 +110,7 @@ extern "C" {
 #define PLATFORM_HAS_OTA
 
 /*  WICED Resources uses a filesystem */
-#define USES_RESOURCE_FILESYSTEM
+//#define USES_RESOURCE_FILESYSTEM
 
 /* Using Binary format file to save SPI flash size */
 //#define PLATFORM_USE_BIN_FW

@@ -5,11 +5,11 @@
  * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
  * the contents of this file may not be disclosed to third parties, copied
  * or duplicated in any form, in whole or in part, without the prior
- * written permission of RedBearLab Corporation.
+ * written permission of RedBear Corporation.
  */
 
 /** @file
- * Defines board support package for RBL205IOT board
+ * Defines board support package for RedBear Duo board
  */
 #include "platform.h"
 #include "platform_config.h"
@@ -55,36 +55,36 @@
 /* GPIO pin table. Used by WICED/platform/MCU/wiced_platform_common.c */
 const platform_gpio_t platform_gpio_pins[] =
 {
-    [ D0 ] = { GPIOB,  7 }, // I2C1_SDA
-    [ D1 ] = { GPIOB,  6 }, // I2C1_SCL /CAN2_TX
-    [ D2 ] = { GPIOB,  5 }, // SPI3_MOSI/CAN2_RX/I2S3_SD
-    [ D3 ] = { GPIOB,  4 }, // SPI3_MISO
-    [ D4 ] = { GPIOB,  3 }, // SPI3_SCK         /I2S3_SCK
-    [ D5 ] = { GPIOA, 15 }, // SPI3_NSS         /I2S3_WS
-    [ D6 ] = { GPIOA, 14 }, // SWCLK
-    [ D7 ] = { GPIOA, 13 }, // SWDIO
-    [ D8 ] = { GPIOA,  2 }, // ADC1_IN2/USART2_TX
-    [ D9 ] = { GPIOA,  3 }, // ADC1_IN3/USART2_RX
-    [ D10] = { GPIOA,  4 }, // ADC1_IN4/SPI1_NSS/DAC_OUT1/
-    [ D11] = { GPIOA,  5 }, // ADC1_IN5/SPI1_SCK/DAC_OUT2
-    [ D12] = { GPIOA,  6 }, // ADC1_IN6/SPI1_MISO
-    [ D13] = { GPIOA,  7 }, // ADC1_IN7/SPI1_MOSI
-    [ D14] = { GPIOA,  1 }, // ADC1_IN1/USART2_RTS
-    [ D15] = { GPIOA,  0 }, // ADC1_IN0/USART2_CTS/WKUP
-    [ D16] = { GPIOA, 10 }, // USART1_RX
-    [ D17] = { GPIOA,  9 }, // USART1_TX
+    [ WICED_GPIO_1 ] = { GPIOB,  7 }, // I2C1_SDA
+    [ WICED_GPIO_2 ] = { GPIOB,  6 }, // I2C1_SCL /CAN2_TX
+    [ WICED_GPIO_3 ] = { GPIOB,  5 }, // SPI3_MOSI/CAN2_RX/I2S3_SD
+    [ WICED_GPIO_4 ] = { GPIOB,  4 }, // SPI3_MISO
+    [ WICED_GPIO_5 ] = { GPIOB,  3 }, // SPI3_SCK         /I2S3_SCK
+    [ WICED_GPIO_6 ] = { GPIOA, 15 }, // SPI3_NSS         /I2S3_WS
+    [ WICED_GPIO_7 ] = { GPIOA, 14 }, // SWCLK
+    [ WICED_GPIO_8 ] = { GPIOA, 13 }, // SWDIO/LED
+    [ WICED_GPIO_9 ] = { GPIOA,  3 }, // ADC1_IN3/USART2_RX
+    [ WICED_GPIO_10] = { GPIOA,  2 }, // ADC1_IN2/USART2_TX
+    [ WICED_GPIO_11] = { GPIOA,  4 }, // ADC1_IN4/SPI1_NSS/DAC_OUT1/
+    [ WICED_GPIO_12] = { GPIOA,  5 }, // ADC1_IN5/SPI1_SCK/DAC_OUT2
+    [ WICED_GPIO_13] = { GPIOA,  6 }, // ADC1_IN6/SPI1_MISO
+    [ WICED_GPIO_14] = { GPIOA,  7 }, // ADC1_IN7/SPI1_MOSI
+    [ WICED_GPIO_15] = { GPIOA,  1 }, // ADC1_IN1/USART2_RTS
+    [ WICED_GPIO_16] = { GPIOA,  0 }, // ADC1_IN0/USART2_CTS/WKUP
+    [ WICED_GPIO_17] = { GPIOA, 10 }, // USART1_RX
+    [ WICED_GPIO_18] = { GPIOA,  9 }, // USART1_TX
 
     // LEDs and Button
-    [ D18] = { GPIOB,  0 },
-    [ D19] = { GPIOB,  1 },
-    [ D20] = { GPIOB, 11 },
-    [ D21] = { GPIOB,  2 }, //BOOT1
+    [ WICED_GPIO_19] = { GPIOB, 11 }, // LED_R
+    [ WICED_GPIO_20] = { GPIOB,  1 }, // LED_G
+    [ WICED_GPIO_21] = { GPIOB,  0 }, // LED_B
+    [ WICED_GPIO_22] = { GPIOB,  2 }, // SETUP button / BOOT1
 
     // SPI Flash
-    [FLASH_SPI_CS  ] = { GPIOB, 12 },
-    [FLASH_SPI_CLK ] = { GPIOB, 13 },
-    [FLASH_SPI_MOSI] = { GPIOC,  3 },
-    [FLASH_SPI_MISO] = { GPIOC,  2 },
+    [ WICED_GPIO_23] = { GPIOB, 12 },
+    [ WICED_GPIO_24] = { GPIOB, 13 },
+    [ WICED_GPIO_25] = { GPIOC,  3 },
+    [ WICED_GPIO_26] = { GPIOC,  2 },
 
     [WICED_GPIO_MAX]= { GPIOE,  0 }, //No this GPIO
 };
@@ -92,45 +92,45 @@ const platform_gpio_t platform_gpio_pins[] =
 /* ADC peripherals. Used WICED/platform/MCU/wiced_platform_common.c */
 const platform_adc_t platform_adc_peripherals[] =
 {
-/*PA2 */ [ A0 ] = { ADC1, ADC_Channel_2,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D8 ] },
-/*PA3 */ [ A1 ] = { ADC1, ADC_Channel_3,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D9 ] },
-/*PA4 */ [ A2 ] = { ADC1, ADC_Channel_4,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D10] },
-/*PA5 */ [ A3 ] = { ADC1, ADC_Channel_5,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D11] },
-/*PA6 */ [ A4 ] = { ADC1, ADC_Channel_6,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D12] },
-/*PA7 */ [ A5 ] = { ADC1, ADC_Channel_7,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D13] },
-/*PA1 */ [ A6 ] = { ADC1, ADC_Channel_1,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D14] },
-/*PA0 */ [ A7 ] = { ADC1, ADC_Channel_0,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ D15] },
+/*PA3 */ [ WICED_ADC_1 ] = { ADC1, ADC_Channel_3,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_9 ] },
+/*PA2 */ [ WICED_ADC_2 ] = { ADC1, ADC_Channel_2,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_10] },
+/*PA4 */ [ WICED_ADC_3 ] = { ADC1, ADC_Channel_4,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_11] },
+/*PA5 */ [ WICED_ADC_4 ] = { ADC1, ADC_Channel_5,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_12] },
+/*PA6 */ [ WICED_ADC_5 ] = { ADC1, ADC_Channel_6,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_13] },
+/*PA7 */ [ WICED_ADC_6 ] = { ADC1, ADC_Channel_7,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_14] },
+/*PA1 */ [ WICED_ADC_7 ] = { ADC1, ADC_Channel_1,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_15] },
+/*PA0 */ [ WICED_ADC_8 ] = { ADC1, ADC_Channel_0,  RCC_APB2Periph_ADC1, 1, &platform_gpio_pins[ WICED_GPIO_16] },
 };
 
 /* PWM peripherals. Used by WICED/platform/MCU/wiced_platform_common.c */
 const platform_pwm_t platform_pwm_peripherals[] =
 {
-/*PB7 */ [ PWM0 ]  = { TIM4,  2, RCC_APB1Periph_TIM4,  GPIO_AF_TIM4,  &platform_gpio_pins[ D0 ] },
-/*PB6 */ [ PWM1 ]  = { TIM4,  1, RCC_APB1Periph_TIM4,  GPIO_AF_TIM4,  &platform_gpio_pins[ D1 ] },
-/*PB5 */ [ PWM2 ]  = { TIM3,  2, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ D2 ] },
-/*PB4 */ [ PWM3 ]  = { TIM3,  1, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ D3 ] },
-/*PB3 */ [ PWM4 ]  = { TIM2,  2, RCC_APB1Periph_TIM2,  GPIO_AF_TIM2,  &platform_gpio_pins[ D4 ] },
-/*PA2 */ [ PWM5 ]  = { TIM5,  3, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ D8 ] },//TIM2_CH3/TIM9_CH1
-/*PA3 */ [ PWM6 ]  = { TIM5,  4, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ D9 ] },//TIM2_CH4/TIM9_CH2
-/*PA6 */ [ PWM7 ]  = { TIM13, 1, RCC_APB1Periph_TIM13, GPIO_AF_TIM13, &platform_gpio_pins[ D12] },//TIM3_CH1
-/*PA7 */ [ PWM8 ]  = { TIM14, 1, RCC_APB1Periph_TIM14, GPIO_AF_TIM14, &platform_gpio_pins[ D13] },//TIM3_CH2
-/*PA1 */ [ PWM9 ]  = { TIM5,  2, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ D14] },//TIM2_CH2
-/*PA0 */ [ PWM10]  = { TIM5,  1, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ D15] },
-/*PA10*/ [ PWM11]  = { TIM1,  3, RCC_APB2Periph_TIM1,  GPIO_AF_TIM1,  &platform_gpio_pins[ D16] },
-/*PA9 */ [ PWM12]  = { TIM1,  2, RCC_APB2Periph_TIM1,  GPIO_AF_TIM1,  &platform_gpio_pins[ D17] },
-/*PB0 */ [ PWM13]  = { TIM3,  3, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ D18] },
-/*PB1 */ [ PWM14]  = { TIM3,  4, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ D19] },
-/*PB11*/ [ PWM15]  = { TIM2,  4, RCC_APB1Periph_TIM2,  GPIO_AF_TIM2,  &platform_gpio_pins[ D20] },
+/*PB7 */ [ WICED_PWM_1 ]  = { TIM4,  2, RCC_APB1Periph_TIM4,  GPIO_AF_TIM4,  &platform_gpio_pins[ WICED_GPIO_1 ] },
+/*PB6 */ [ WICED_PWM_2 ]  = { TIM4,  1, RCC_APB1Periph_TIM4,  GPIO_AF_TIM4,  &platform_gpio_pins[ WICED_GPIO_2 ] },
+/*PB5 */ [ WICED_PWM_3 ]  = { TIM3,  2, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ WICED_GPIO_3 ] },
+/*PB4 */ [ WICED_PWM_4 ]  = { TIM3,  1, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ WICED_GPIO_4 ] },
+/*PB3 */ [ WICED_PWM_5 ]  = { TIM2,  2, RCC_APB1Periph_TIM2,  GPIO_AF_TIM2,  &platform_gpio_pins[ WICED_GPIO_5 ] },
+/*PA3 */ [ WICED_PWM_6 ]  = { TIM5,  4, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ WICED_GPIO_9 ] },//TIM2_CH4/TIM9_CH2
+/*PA2 */ [ WICED_PWM_7 ]  = { TIM5,  3, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ WICED_GPIO_10] },//TIM2_CH3/TIM9_CH1
+/*PA6 */ [ WICED_PWM_8 ]  = { TIM13, 1, RCC_APB1Periph_TIM13, GPIO_AF_TIM13, &platform_gpio_pins[ WICED_GPIO_13] },//TIM3_CH1
+/*PA7 */ [ WICED_PWM_9 ]  = { TIM14, 1, RCC_APB1Periph_TIM14, GPIO_AF_TIM14, &platform_gpio_pins[ WICED_GPIO_14] },//TIM3_CH2
+/*PA1 */ [ WICED_PWM_10]  = { TIM5,  2, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ WICED_GPIO_15] },//TIM2_CH2
+/*PA0 */ [ WICED_PWM_11]  = { TIM5,  1, RCC_APB1Periph_TIM5,  GPIO_AF_TIM5,  &platform_gpio_pins[ WICED_GPIO_16] },
+/*PA10*/ [ WICED_PWM_12]  = { TIM1,  3, RCC_APB2Periph_TIM1,  GPIO_AF_TIM1,  &platform_gpio_pins[ WICED_GPIO_17] },
+/*PA9 */ [ WICED_PWM_13]  = { TIM1,  2, RCC_APB2Periph_TIM1,  GPIO_AF_TIM1,  &platform_gpio_pins[ WICED_GPIO_18] },
+/*PB11*/ [ WICED_PWM_14]  = { TIM2,  4, RCC_APB1Periph_TIM2,  GPIO_AF_TIM2,  &platform_gpio_pins[ WICED_GPIO_19] },
+/*PB1 */ [ WICED_PWM_15]  = { TIM3,  4, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ WICED_GPIO_20] },
+/*PB0 */ [ WICED_PWM_16]  = { TIM3,  3, RCC_APB1Periph_TIM3,  GPIO_AF_TIM3,  &platform_gpio_pins[ WICED_GPIO_21] },
 };
 
 /* I2C peripherals. Used by WICED/platform/MCU/wiced_platform_common.c */
 const platform_i2c_t platform_i2c_peripherals[] =
 {
-    [I2C_1] =
+    [WICED_I2C_1] =
     {
         .port                    = I2C1,
-        .pin_scl                 = &platform_gpio_pins[D1], /*PB6 */
-        .pin_sda                 = &platform_gpio_pins[D0], /*PB7 */
+        .pin_scl                 = &platform_gpio_pins[WICED_GPIO_2], /*PB6 */
+        .pin_sda                 = &platform_gpio_pins[WICED_GPIO_1], /*PB7 */
         .peripheral_clock_reg    = RCC_APB1Periph_I2C1,
         .tx_dma                  = DMA1,
         .tx_dma_peripheral_clock = RCC_AHB1Periph_DMA1,
@@ -147,15 +147,15 @@ const platform_i2c_t platform_i2c_peripherals[] =
 /* PWM peripherals. Used by WICED/platform/MCU/wiced_platform_common.c */
 const platform_spi_t platform_spi_peripherals[] =
 {
-    [SPI_1]  =
+    [WICED_SPI_1]  =
     {
         .port                  = SPI1,
         .gpio_af               = GPIO_AF_SPI1,
         .peripheral_clock_reg  = RCC_APB2Periph_SPI1,
         .peripheral_clock_func = RCC_APB2PeriphClockCmd,
-        .pin_mosi              = &platform_gpio_pins[D13], /*PA7 */
-        .pin_miso              = &platform_gpio_pins[D12], /*PA6 */
-        .pin_clock             = &platform_gpio_pins[D11], /*PA5 */
+        .pin_mosi              = &platform_gpio_pins[WICED_GPIO_14], /*PA7 */
+        .pin_miso              = &platform_gpio_pins[WICED_GPIO_13], /*PA6 */
+        .pin_clock             = &platform_gpio_pins[WICED_GPIO_12], /*PA5 */
         .tx_dma =
         {
             .controller        = DMA2,
@@ -176,15 +176,16 @@ const platform_spi_t platform_spi_peripherals[] =
         },
     },
 
-    [SPI_2]  =
+	/* Occupied by external serial flash */
+    [WICED_SPI_2]  =
     {
         .port                  = SPI2,
         .gpio_af               = GPIO_AF_SPI2,
         .peripheral_clock_reg  = RCC_APB1Periph_SPI2,
         .peripheral_clock_func = RCC_APB1PeriphClockCmd,
-        .pin_mosi              = &platform_gpio_pins[FLASH_SPI_MOSI], /*PC3  */
-        .pin_miso              = &platform_gpio_pins[FLASH_SPI_MISO], /*PC2  */
-        .pin_clock             = &platform_gpio_pins[FLASH_SPI_CLK ], /*PB13 */
+        .pin_mosi              = &platform_gpio_pins[WICED_GPIO_25], /*PC3  */
+        .pin_miso              = &platform_gpio_pins[WICED_GPIO_26], /*PC2  */
+        .pin_clock             = &platform_gpio_pins[WICED_GPIO_24], /*PB13 */
         .tx_dma =
         {
             .controller        = DMA1,
@@ -205,15 +206,15 @@ const platform_spi_t platform_spi_peripherals[] =
         },
     },
 
-    [SPI_3]  =
+    [WICED_SPI_3]  =
     {
         .port                  = SPI3,
         .gpio_af               = GPIO_AF_SPI3,
         .peripheral_clock_reg  = RCC_APB1Periph_SPI3,
         .peripheral_clock_func = RCC_APB1PeriphClockCmd,
-        .pin_mosi              = &platform_gpio_pins[D2], /*PB5 */
-        .pin_miso              = &platform_gpio_pins[D3], /*PB4 */
-        .pin_clock             = &platform_gpio_pins[D4], /*PB3 */
+        .pin_mosi              = &platform_gpio_pins[WICED_GPIO_3], /*PB5 */
+        .pin_miso              = &platform_gpio_pins[WICED_GPIO_4], /*PB4 */
+        .pin_clock             = &platform_gpio_pins[WICED_GPIO_5], /*PB3 */
         .tx_dma =
         {
             .controller        = DMA1,
@@ -240,7 +241,7 @@ platform_spi_slave_driver_t platform_spi_slave_drivers[WICED_SPI_MAX];
 #if defined ( WICED_PLATFORM_INCLUDES_SPI_FLASH )
 const wiced_spi_device_t wiced_spi_flash =
 {
-    .port        = SPI_2,
+    .port        = WICED_SPI_2,
     .chip_select = WICED_SPI_FLASH_CS,
     .speed       = 50000000,
     .mode        = (SPI_CLOCK_RISING_EDGE | SPI_CLOCK_IDLE_HIGH | SPI_NO_DMA | SPI_MSB_FIRST),
@@ -251,7 +252,7 @@ const wiced_spi_device_t wiced_spi_flash =
 /* I2S peripherals */
 const platform_i2s_t platform_i2s_peripherals[] =
 {
-    [I2S_1] =
+    [WICED_I2S_1] =
     {
         .spi                          = SPI3,
 #ifdef DAC_EXTERNAL_OSCILLATOR
@@ -264,9 +265,9 @@ const platform_i2s_t platform_i2s_peripherals[] =
         .gpio_af                      = GPIO_AF_SPI3,
         .peripheral_clock             = RCC_APB1Periph_SPI3,
         .peripheral_clock_func        = RCC_APB1PeriphClockCmd,
-        .pin_ck                       = &platform_gpio_pins[D4],     // Fake pins for temporary
-        .pin_sd                       = &platform_gpio_pins[D2],
-        .pin_ws                       = &platform_gpio_pins[D5],
+        .pin_ck                       = &platform_gpio_pins[WICED_GPIO_5],     // Fake pins for temporary
+        .pin_sd                       = &platform_gpio_pins[WICED_GPIO_3],
+        .pin_ws                       = &platform_gpio_pins[WICED_GPIO_6],
         .pin_mclk                     = &platform_gpio_pins[WICED_GPIO_MAX],
         .tx_dma.dma_register          = DMA1,
         .tx_dma.stream                = DMA1_Stream7,
@@ -286,11 +287,11 @@ const platform_i2s_t platform_i2s_peripherals[] =
 /* UART peripherals and runtime drivers. Used by WICED/platform/MCU/wiced_platform_common.c */
 const platform_uart_t platform_uart_peripherals[] =
 {
-    [UART_1] =
+    [WICED_UART_1] =
     {
         .port               = USART1,
-        .tx_pin             = &platform_gpio_pins[D17], /*PA9 */
-        .rx_pin             = &platform_gpio_pins[D16], /*PA10*/
+        .tx_pin             = &platform_gpio_pins[WICED_GPIO_18], /*PA9 */
+        .rx_pin             = &platform_gpio_pins[WICED_GPIO_17], /*PA10*/
         .cts_pin            = NULL,
         .rts_pin            = NULL,
         .tx_dma_config =
@@ -313,13 +314,13 @@ const platform_uart_t platform_uart_peripherals[] =
         },
     },
 
-    [UART_2] =
+    [WICED_UART_2] =
     {
         .port               = USART2,
-        .tx_pin             = &platform_gpio_pins[D8], /*PA2 */
-        .rx_pin             = &platform_gpio_pins[D9], /*PA3 */
-        .cts_pin            = &platform_gpio_pins[D15], /*PA0 */
-        .rts_pin            = &platform_gpio_pins[D14], /*PA1 */
+        .tx_pin             = &platform_gpio_pins[WICED_GPIO_10], /*PA2 */
+        .rx_pin             = &platform_gpio_pins[WICED_GPIO_9 ], /*PA3 */
+        .cts_pin            = &platform_gpio_pins[WICED_GPIO_16], /*PA0 */
+        .rts_pin            = &platform_gpio_pins[WICED_GPIO_15], /*PA1 */
         .tx_dma_config =
         {
             .controller     = DMA1,
@@ -496,26 +497,16 @@ void platform_init_peripheral_irq_priorities( void )
 
 void platform_init_external_devices( void )
 {
-    //wiced_bool_t button1_pressed;
-
     /* Initialise buttons to input by default */
-    platform_gpio_init( &platform_gpio_pins[BTN1], INPUT_PULL_UP );
-#if 0
-    button1_pressed = wiced_gpio_input_get( BTN1 ) ? WICED_FALSE : WICED_TRUE;  /* The button has inverse logic */
-    if ( button1_pressed != WICED_TRUE )
-    {
-        platform_gpio_init( &platform_gpio_pins[LED], OUTPUT_PUSH_PULL );
-        platform_gpio_output_high( &platform_gpio_pins[LED] );
-    }
-#endif
+    platform_gpio_init( &platform_gpio_pins[WICED_BUTTON1], INPUT_PULL_UP );
 
     /* Initialise LEDs and turn off by default */
-    platform_gpio_init( &platform_gpio_pins[LED_R], OUTPUT_PUSH_PULL );
-    platform_gpio_init( &platform_gpio_pins[LED_G], OUTPUT_PUSH_PULL );
-    platform_gpio_init( &platform_gpio_pins[LED_B], OUTPUT_PUSH_PULL );
-    platform_gpio_output_high( &platform_gpio_pins[LED_R] );
-    platform_gpio_output_high( &platform_gpio_pins[LED_G] );
-    platform_gpio_output_high( &platform_gpio_pins[LED_B] );
+    platform_gpio_init( &platform_gpio_pins[WICED_LED1], OUTPUT_PUSH_PULL );
+    platform_gpio_init( &platform_gpio_pins[WICED_LED2], OUTPUT_PUSH_PULL );
+    platform_gpio_init( &platform_gpio_pins[WICED_LED3], OUTPUT_PUSH_PULL );
+    platform_gpio_output_high( &platform_gpio_pins[WICED_LED1] );
+    platform_gpio_output_high( &platform_gpio_pins[WICED_LED2] );
+    platform_gpio_output_high( &platform_gpio_pins[WICED_LED3] );
 
 #ifndef WICED_DISABLE_STDIO
     /* Initialise UART standard I/O */
@@ -539,12 +530,12 @@ wiced_bool_t platform_check_factory_reset( void )
 
         if ( led_state == 0 )
         {
-            platform_gpio_output_high( &platform_gpio_pins[ WICED_LED1 ] );
+            platform_gpio_output_high( &platform_gpio_pins[ BOOTLOADER_LED_GPIO ] );
             led_state = 1;
         }
         else
         {
-            platform_gpio_output_low( &platform_gpio_pins[ WICED_LED1 ] );
+            platform_gpio_output_low( &platform_gpio_pins[ BOOTLOADER_LED_GPIO ] );
             led_state = 0;
         }
         if ( factory_reset_counter == 5000 )
@@ -560,28 +551,28 @@ wiced_bool_t platform_check_factory_reset( void )
  ******************************************************/
 WWD_RTOS_DEFINE_ISR( usart1_irq )
 {
-    platform_uart_irq( &platform_uart_drivers[UART_1] );
+    platform_uart_irq( &platform_uart_drivers[WICED_UART_1] );
 }
 WWD_RTOS_DEFINE_ISR( usart1_tx_dma_irq )
 {
-    platform_uart_tx_dma_irq( &platform_uart_drivers[UART_1] );
+    platform_uart_tx_dma_irq( &platform_uart_drivers[WICED_UART_1] );
 }
 WWD_RTOS_DEFINE_ISR( usart1_rx_dma_irq )
 {
-    platform_uart_rx_dma_irq( &platform_uart_drivers[UART_1] );
+    platform_uart_rx_dma_irq( &platform_uart_drivers[WICED_UART_1] );
 }
 
 WWD_RTOS_DEFINE_ISR( usart2_irq )
 {
-    platform_uart_irq( &platform_uart_drivers[UART_2] );
+    platform_uart_irq( &platform_uart_drivers[WICED_UART_2] );
 }
 WWD_RTOS_DEFINE_ISR( usart2_tx_dma_irq )
 {
-    platform_uart_tx_dma_irq( &platform_uart_drivers[UART_2] );
+    platform_uart_tx_dma_irq( &platform_uart_drivers[WICED_UART_2] );
 }
 WWD_RTOS_DEFINE_ISR( usart2_rx_dma_irq )
 {
-    platform_uart_rx_dma_irq( &platform_uart_drivers[UART_2] );
+    platform_uart_rx_dma_irq( &platform_uart_drivers[WICED_UART_2] );
 }
 
 WWD_RTOS_DEFINE_ISR( bt_uart_irq )
