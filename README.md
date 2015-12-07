@@ -50,11 +50,15 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 To test WiFi, you can use this command, it is an AP scanner demo:
 
-"make snip.scan-RB_DUO_ES2 JTAG=RBLINK download run"
+"make snip.scan-RB_DUO JTAG=RBLINK download run" - WiFi firmware in internal flash    
+or   
+"make snip.scan-RB_DUO_ext JTAG=RBLINK download download_apps run" - WiFi firmware in external serial flash
 
 To test Blutooth LE, you can use this command, it is a proximity reporter demo:
 
-"make snip.bluetooth.ble_proximity_reporter-RB_Duo_ES2 JTAG=RBLINK download run"
+"make snip.bluetooth.ble_proximity_reporter-RB_DUO JTAG=RBLINK download run"   
+or    
+"make snip.bluetooth.ble_proximity_reporter-RB_DUO_ext JTAG=RBLINK download run"
 
 
 ## Upload Firmware
@@ -65,7 +69,7 @@ To test Blutooth LE, you can use this command, it is a proximity reporter demo:
 
 3. Start the Terminal (OSX) or command prompt (Windows) and change the working directory to WICED-SDK-3.3.1>
 
-4. Type in "make rbl.rgb-RB_Duo JTAG=RBLINK download run" and press the Enter on the keyboard to begin build the project that under the folder "WICED-SDK-3.3.1\apps\rbl\rgb". More details about make usage please refer to the Makefile which under "WICED-SDK-3.3.1\"
+4. Type in "make redbear.rgb-RB_DUO JTAG=RBLINK download run" and press the Enter on the keyboard to begin build the project that under the folder "WICED-SDK-3.3.1\apps\redbear\rgb". More details about make usage please refer to the Makefile which under "WICED-SDK-3.3.1\"
 
 * For OSX, use "./" before "make", e.g. "./make"
 
@@ -76,7 +80,7 @@ To test Blutooth LE, you can use this command, it is a proximity reporter demo:
 
 The RBLink supports drag and drop programming, so you can easily deploy your firmware.
 
-Using this command to compile the example "make rbl.rgb-RB_Duo", it will create a file with ending "_MSD.bin" in the "build" folder, drag and drop it to the MSD drive via the RBLink, the firmware will be uploaded to the Duo.
+Using this command to compile the example "make redbear.rgb-RB_DUO", it will create a file with ending "_MSD.bin" in the "build" folder, drag and drop it to the MSD drive via the RBLink, the firmware will be uploaded to the Duo.
 
 
 ## Other Tools
