@@ -65,14 +65,14 @@ void application_start( )
     /* Initialise the WICED device */
     wiced_init();
 	
-	// The RGB and setup button are initialized in platform.c
+    // The RGB and setup button are initialized in platform.c
 
     WPRINT_APP_INFO( ( "The RGB is breathing green.\n" ) );
 
     while ( 1 )
     {
-	    wiced_pwm_init( RGB_G_PWM, 1000, duty );
-	    wiced_pwm_start( RGB_G_PWM );
+        wiced_pwm_init( RGB_G_PWM, 1000, duty );
+        wiced_pwm_start( RGB_G_PWM );
 
         wiced_rtos_delay_milliseconds( 10 );
 
