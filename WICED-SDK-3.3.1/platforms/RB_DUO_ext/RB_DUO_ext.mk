@@ -72,9 +72,9 @@ $(NAME)_SOURCES := platform.c
 # APP1 :=
 # APP2 :=
 
-# WICED APPS LOOKUP TABLE
-APPS_LUT_HEADER_LOC := 0x0000
-APPS_START_SECTOR := 1
+# WICED APPS LOOKUP TABLE, skip the first 4K since the dfu-util can not access the SPI flash from address 0x0
+APPS_LUT_HEADER_LOC := 0x1000
+APPS_START_SECTOR := 2
 
 ifeq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
 ifneq ($(APP),bootloader)
