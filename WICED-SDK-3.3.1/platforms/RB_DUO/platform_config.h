@@ -65,6 +65,9 @@ extern "C" {
 /*  Internal flash voltage range : 2.7 to 3.6V */
 #define PLATFORM_STM32_VOLTAGE_2V7_TO_3V6
 
+/*  Enable software flow control for the Bluetooth UART */
+#define WICED_BT_UART_MANUAL_CTS_RTS
+
 
 /******************************************************
  *  Wi-Fi Options
@@ -104,7 +107,6 @@ extern "C" {
 
 /* Bluetooth host wake pin is present */
 #define WICED_USE_BT_HOST_WAKE_PIN
-
 
 /*  OTA */
 #define PLATFORM_HAS_OTA
