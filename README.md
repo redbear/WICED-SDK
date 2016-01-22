@@ -3,7 +3,7 @@
 
 The Duo Kit has two boards, the Duo and the RBLink. 
 
-*** There is an issue with OSX 10.11, the RBLink will not work (with OpenOCD/libusb). As a workaround, please use MSD (drag & drop) method, OSX 10.10 or Windows at this moment.
+*** Note: There is a known issue with OSX 10.11, the RBLink will not work (with OpenOCD/libusb). As a workaround, please use MSD (drag & drop) method, OSX 10.10 or Windows at this moment. Apple replied and will fix this in OSX version 10.11.4.
 
 
 ## Red Bear Duo
