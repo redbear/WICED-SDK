@@ -3,14 +3,16 @@
 
 The Duo Kit has two boards, the Duo and the RBLink. 
 
-*** Note: There is a known issue with OSX 10.11, the RBLink will not work (with OpenOCD/libusb). As a workaround, please use MSD (drag & drop) method, OSX 10.10 or Windows at this moment. Apple replied and will fix this in OSX version 10.11.4.
+*** Note: There is a known issue with OSX 10.11, the RBLink will not work (with OpenOCD/libusb). As a workaround, please use MSD (drag & drop) method, OSX 10.10 or Windows at this moment.
+
+*** Update: Apple replied and will fix this in OSX version 10.11.4 (tested on 10.11.4 beta and it works).
 
 
 ## Red Bear Duo
 
 The Red Bear Duo contains a ST32F205 MCU, AP6212A WiFi (802.11 b/g/n 2.4GHz) + Bluetooth (4.1) combo module and an onboard 2 MB SPI Flash. The MCU has 1 MB Flash and 128 KB SRAM, running at 120 MHz. The wireless module built on Broadcom BCM43438 A1 chip.
 
-![image](RBDuo.png)
+![image](docs/images/RBDuo_Pinout.png)
 
 
 ## Unlock the Duo
@@ -33,7 +35,7 @@ To use the board with WICED SDK 3.3.1:
 
 ## RedBear RBLink (Programmer/Debugger) 
 
-![image](RBLink.png)
+![image](docs/images/RBLink_Pinout.png)
 
 The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (also works for other ST MCUs) based on STLink:
 
