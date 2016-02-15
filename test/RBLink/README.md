@@ -9,7 +9,7 @@ Note: Use RBLink to upload firmware will clear the default bootloader, if you ne
 
 Get the default bootloader from [this](https://github.com/redbear/Duo/tree/master/firmware/bootloader) URL.
 
-#### Unlock the Duo
+## Unlock the Duo
 
 The preloaded firmware is protected by default, you need to unlock it before using the RBLink to upload firmware (only need to do once).
 
@@ -21,11 +21,11 @@ The preloaded firmware is protected by default, you need to unlock it before usi
 
 * You will see there is a drive named 'RBLink' in your computer.
 
-* Inside the [test](../test/RBLink) folder, drag and drop the RBDuo_Unlock.bin file to the RBLink drive, then the onboard RGB LED will flash green color very fast.
+* Inside this folder, drag and drop the 'RBDuo_Unlock.bin' file to the RBLink drive, then the onboard RGB LED will flash green color very fast.
 
 * Disconnect it from your computer USB port.
 
-#### RBLink with OpenOCD
+## RBLink with OpenOCD
 
 * Connect the RBLink to your computer USB port again.
 
@@ -45,14 +45,14 @@ The preloaded firmware is protected by default, you need to unlock it before usi
 
 		$ ./make snip.bluetooth.ble_proximity_reporter-RB_DUO JTAG=RBLINK download run  
 	
-	Use iOS LightBlue App or Android B-BLE App to see.
+	Use iOS 'LightBlue' App or Android 'B-BLE' App to see.
 
-#### RBLink with Drag & Drop
+## RBLink with Drag & Drop
 
 * Connect the RBLink to your computer USB port again.
 
 * You will see the 'RBLink' drive again in your computer.
 
-* Drag & drop to the 'rbl_rgb-RB_DUO.bin_MSD.bin' to the drive. 
+* Drag & drop the 'rbl_rgb-RB_DUO.bin_MSD.bin' to the drive. 
 
 * You will see the RGB changes color alternatively, also press the 'SETUP' button to see the effect.

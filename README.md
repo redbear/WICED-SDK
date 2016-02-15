@@ -1,9 +1,9 @@
 
 ## WICED SDK Add-on for RedBear Duo
 
-The [RedBear Duo](http://redbear.cc/duo/) support WICED WiFi SDK by adding this add-on. The Duo IoT development kit has two boards, the Duo and the RBLink.
+The [RedBear Duo](http://redbear.cc/duo/) supports Broadcom WICED WiFi SDK by adding this add-on. The Duo IoT development kit has two boards, the Duo and the RBLink.
 
-It is highly recommended you to use RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
+It is highly recommended you to use the RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
 
 Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit).
 
@@ -71,13 +71,10 @@ You can use either Windows, OSX or Linux to compile your firmware and use the bo
 
 ## Other Tools
 
-The RBLink is compatible with the [STLink Utility](http://www.st.com/web/en/catalog/tools/PF258168)
-
-ST Visual Programmer (STVP)
-
-qstlink
-
-pystlimk
+* The RBLink is compatible with the [STLink Utility](http://www.st.com/web/en/catalog/tools/PF258168)
+* ST Visual Programmer (STVP)
+* qstlink
+* pystlimk
 
 
 ## Resources
