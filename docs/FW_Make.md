@@ -33,11 +33,11 @@ There are three methods for uploading WICED application firmware for the Duo:
 
 ## Bootloader DFU Mode
 
-* see [this](../test/DFU/README.md) document for details.
+* see [this](../firmware/DFU/README.md) document for details.
 
 
 ## RBLink
 
-* See [this](../test/RBLink/README.md) document for details.
+* See [this](../firmware/RBLink/README.md) document for details.
 
 
