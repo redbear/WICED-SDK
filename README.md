@@ -62,6 +62,11 @@ You can use either Windows, OSX or Linux to compile your firmware and use the bo
 * See [Firmware Compilation Guide](docs/FW_Make.md) for details.
 
 
+## Bluetooth Stack
+
+The SDK comes with a closed source Bluetooth Stack, if you want an open source stack, you can try [BTstack](https://github.com/bluekitchen/btstack/tree/ble-api-cleanup/port/wiced).
+
+
 ## Limitations
 
 * Debugging
@@ -80,7 +85,7 @@ You can use either Windows, OSX or Linux to compile your firmware and use the bo
 ## Resources
 
 * [Broadcom WICED WiFi](https://community.broadcom.com/community/wiced-wifi)
-
+* [BTstack for WICED](https://github.com/bluekitchen/btstack/tree/ble-api-cleanup/port/wiced)
 
 
 
