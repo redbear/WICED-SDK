@@ -1,5 +1,5 @@
 /*
- * Copyright 2015, RedBear
+ * Copyright 2016, RedBear
  * All Rights Reserved.
  *
  * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
@@ -51,7 +51,7 @@ extern "C" {
 #define PLL_P_CONSTANT       ( 2 )
 
 /*  PLLQ : 5 */
-#define PPL_Q_CONSTANT       ( 5 )
+#define PLL_Q_CONSTANT       ( 5 )
 
 /*  System clock source  : PLL clock */
 #define SYSTEM_CLOCK_SOURCE  ( RCC_SYSCLKSource_PLLCLK )
@@ -80,10 +80,10 @@ extern "C" {
 #define WICED_WIFI_OOB_IRQ_GPIO_PIN  ( 0 )
 
 /*  Wi-Fi power pin is present */
-//#define WICED_USE_WIFI_POWER_PIN
+#define WICED_USE_WIFI_POWER_PIN
 
-/*  Wi-Fi reset pin is present */
-#define WICED_USE_WIFI_RESET_PIN
+/* Wi-Fi power pin is active high */
+#define WICED_USE_WIFI_POWER_PIN_ACTIVE_HIGH
 
 /*  WLAN Powersave Clock Source
  *  The WLAN sleep clock can be driven from one of two sources:
@@ -112,7 +112,7 @@ extern "C" {
 #define PLATFORM_HAS_OTA
 
 /*  WICED Resources uses a filesystem */
-//#define USES_RESOURCE_FILESYSTEM
+#define USES_RESOURCE_FILESYSTEM
 
 /* Using Binary format file to save SPI flash size */
 //#define PLATFORM_USE_BIN_FW

@@ -1,5 +1,5 @@
 #
-# Copyright 2015, RedBear
+# Copyright 2016, RedBear
 # All Rights Reserved.
 #
 # This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
@@ -8,46 +8,58 @@
 # written permission of RedBear Corporation.
 #
 
-NAME := Platform_RB_DUO
+NAME := Platform_RB_DUO_ext
 
 WLAN_CHIP            := 43438
 WLAN_CHIP_REVISION   := A1
+WLAN_CHIP_FAMILY     := 4343x
 HOST_MCU_FAMILY      := STM32F2xx
 HOST_MCU_VARIANT     := STM32F2x5
 HOST_MCU_PART_NUMBER := STM32F205RGT6
-BT_CHIP              := 43438
-BT_CHIP_REVISION     := A1
-BT_MODE              ?= HCI
+
+PLATFORM_SUPPORTS_BUTTONS := 1
+
+# BCM943438WCD1
+BT_CHIP          := 43438
+BT_CHIP_REVISION := A1
+BT_MODE          ?= HCI
+BT_CHIP_XTAL_FREQUENCY := 26MHz
 
 
-WIFI_FIRMWARE_IN_SPI_FLASH = NO
+WIFI_FIRMWARE_IN_SPI_FLASH = YES
 #if YES, USES_RESOURCE_FILESYSTEM also must be define in platform_config.h
 
 ifneq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
 INTERNAL_MEMORY_RESOURCES = $(ALL_RESOURCES)
 endif
 
-EXTRA_TARGET_MAKEFILES +=  $(MAKEFILES_PATH)/standard_platform_targets.mk
+VALID_BUSES := SDIO SPI
 
 ifndef BUS
 BUS := SDIO
 endif
 
-VALID_BUSES := SDIO SPI
+EXTRA_TARGET_MAKEFILES +=  $(MAKEFILES_PATH)/standard_platform_targets.mk
 
+# Set the WIFI firmware in multi application file system to point to firmware
+ifeq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
+MULTI_APP_WIFI_FIRMWARE   := resources/firmware/$(WLAN_CHIP)/$(WLAN_CHIP)$(WLAN_CHIP_REVISION)$(WLAN_CHIP_BIN_TYPE).bin
+endif
+
+ifeq ($(MULTI_APP_WIFI_FIRMWARE),)
 ifeq ($(BUS),SDIO)
-WIFI_IMAGE_DOWNLOAD := direct
-ifneq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
-GLOBAL_DEFINES      += WWD_DIRECT_RESOURCES
+GLOBAL_DEFINES          += WWD_DIRECT_RESOURCES
 endif
 else
-ifeq ($(BUS),SPI)
-WIFI_IMAGE_DOWNLOAD := buffered
-endif
+# Setting some internal build parameters
+WIFI_FIRMWARE           := $(MULTI_APP_WIFI_FIRMWARE)
+WIFI_FIRMWARE_LOCATION 	:= WIFI_FIRMWARE_IN_MULTI_APP
+GLOBAL_DEFINES          += WIFI_FIRMWARE_IN_MULTI_APP
 endif
 
 # Global includes
-GLOBAL_INCLUDES += .
+GLOBAL_INCLUDES  := .
+GLOBAL_INCLUDES  += $(WICED_BASE)/libraries/inputs/gpio_button
 
 # Global defines
 # HSE_VALUE = STM32 crystal frequency = 26MHz (needed to make UART work correctly)
@@ -55,7 +67,8 @@ GLOBAL_DEFINES += HSE_VALUE=26000000
 GLOBAL_DEFINES += $$(if $$(NO_CRLF_STDIO_REPLACEMENT),,CRLF_STDIO_REPLACEMENT)
 
 # Components
-$(NAME)_COMPONENTS += drivers/spi_flash
+$(NAME)_COMPONENTS += drivers/spi_flash \
+                      inputs/gpio_button
 
 # Source files
 $(NAME)_SOURCES := platform.c
