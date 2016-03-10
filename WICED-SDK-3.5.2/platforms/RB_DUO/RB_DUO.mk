@@ -29,10 +29,6 @@ BT_CHIP_XTAL_FREQUENCY := 26MHz
 WIFI_FIRMWARE_IN_SPI_FLASH = NO
 #if YES, USES_RESOURCE_FILESYSTEM also must be define in platform_config.h
 
-ifneq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
-INTERNAL_MEMORY_RESOURCES = $(ALL_RESOURCES)
-endif
-
 VALID_BUSES := SDIO SPI
 
 ifndef BUS
@@ -43,19 +39,16 @@ EXTRA_TARGET_MAKEFILES +=  $(MAKEFILES_PATH)/standard_platform_targets.mk
 
 # Set the WIFI firmware in multi application file system to point to firmware
 ifeq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
-MULTI_APP_WIFI_FIRMWARE   := resources/firmware/$(WLAN_CHIP)/$(WLAN_CHIP)$(WLAN_CHIP_REVISION)$(WLAN_CHIP_BIN_TYPE).bin
-endif
-
-ifeq ($(MULTI_APP_WIFI_FIRMWARE),)
-ifeq ($(BUS),SDIO)
-GLOBAL_DEFINES          += WWD_DIRECT_RESOURCES
+ifneq ($(APP),bootloader)
+FILESYSTEM_IMAGE = $(OUTPUT_DIR)/resources/filesystem.bin
 endif
 else
-# Setting some internal build parameters
-WIFI_FIRMWARE           := $(MULTI_APP_WIFI_FIRMWARE)
-WIFI_FIRMWARE_LOCATION 	:= WIFI_FIRMWARE_IN_MULTI_APP
-GLOBAL_DEFINES          += WIFI_FIRMWARE_IN_MULTI_APP
+ifeq ($(BUS),SDIO)
+INTERNAL_MEMORY_RESOURCES = $(ALL_RESOURCES)
+GLOBAL_DEFINES           += WWD_DIRECT_RESOURCES
 endif
+endif
+
 
 # Global includes
 GLOBAL_INCLUDES  := .
@@ -88,12 +81,6 @@ $(NAME)_SOURCES := platform.c
 # WICED APPS LOOKUP TABLE, skip the first 4K since the dfu-util can not access the SPI flash from address 0x0
 APPS_LUT_HEADER_LOC := 0x1000 
 APPS_START_SECTOR := 2
-
-ifeq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
-ifneq ($(APP),bootloader)
-FILESYSTEM_IMAGE = $(OUTPUT_DIR)/resources/filesystem.bin
-endif
-endif
 
 ifneq ($(APP),bootloader)
 ifneq ($(MAIN_COMPONENT_PROCESSING),1)
