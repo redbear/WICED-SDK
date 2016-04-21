@@ -12,13 +12,13 @@ The following commands use the snip.scan project as an example.
 
 For OSX & Linux:
 	
-	$ ./make rbl.rgb-RB_DUO
+	$ ./make redbear.rgb-RB_DUO
 
 For Windows:
 	
-	C:\WICED-SDK-3.3.1> make rbl.rgb-RB_DUO
+	C:\WICED-SDK-3.3.1> make redbear.rgb-RB_DUO
 
-After that, in the 'build/rbl_rgb-RB_DUO/binary' folder, there are two files compiled 'rbl_rgb-RB_DUO.bin' and 'rbl_rgb-RB_DUO.bin_MSD.bin'. The first one is for uploading using DFU mode while the second one is for using the RBLink drag and drop method.
+After that, in the 'build/redbear_rgb-RB_DUO/binary' folder, there are two files compiled 'redbear_rgb-RB_DUO.bin' and 'redbear_rgb-RB_DUO.bin_MSD.bin'. The first one is for uploading using DFU mode while the second one is for using the RBLink drag and drop method.
 
 
 ## Uploading Firmware
