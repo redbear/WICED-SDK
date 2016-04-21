@@ -16,7 +16,7 @@ $(NAME)_SOURCES    := ble_proximity_reporter.c \
 
 $(NAME)_INCLUDES   := .
 
-$(NAME)_COMPONENTS := libraries/drivers/bluetooth
+$(NAME)_COMPONENTS := libraries/drivers/bluetooth_le
 
 VALID_PLATFORMS += BCM9WCDPLUS114 \
                    BCM943909WCD1 \
