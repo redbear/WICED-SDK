@@ -47,7 +47,7 @@ To use the Duo with WICED SDK 3.3.1:
 
 * Download and copy the files in this add-on package to the WICED-SDK-3.3.1 and unzip and replace the original files
 
-*** Note: The latest version of WICED SDK is 3.5.2, we will support it as soon as possible.
+*** Note: The add-on package for the latest version of WICED-SDK-3.5.2 is ready on Github. Please switch to the master branch to get it.
 
 
 ## Memory Map
