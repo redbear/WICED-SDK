@@ -16,7 +16,7 @@ For OSX & Linux:
 
 For Windows:
 	
-	C:\WICED-SDK-3.3.1> make redbear.rgb-RB_DUO
+	C:\WICED-SDK-3.5.2> make redbear.rgb-RB_DUO
 
 After that, in the 'build/redbear_rgb-RB_DUO/binary' folder, there are two files compiled 'redbear_rgb-RB_DUO.bin' and 'redbear_rgb-RB_DUO.bin_MSD.bin'. The first one is for uploading using DFU mode while the second one is for using the RBLink drag and drop method.
 
