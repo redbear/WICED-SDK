@@ -1,0 +1,89 @@
+
+
+RGB status:
+white : application start.
+green : connect to RedBear success, start to connect all devices.
+red  : ble device is all connected. start to discover all devices.
+red&blue : ALL discoveryed, now you can send command.
+
+{
+    "RGB" : 
+    {
+    	"ID"        : 1,     
+    	"OpCode"    : 1,
+    	"R"         : 255,   
+    	"G"         : 100, 
+    	"B"         : 125    
+    }
+}
+
+
+Note: 
+	ID: 0~7
+	OpCode: 0 status change  
+		    1 write status
+		    2 read status
+    R: 0~255
+    G: 0~255
+    B: 0~255
+        
+For example:
+/*****/
+client write command:
+Set Nano_Demo_1 RGB.
+{
+    "RGB" : 
+    {
+    	"ID"        : 1,     
+    	"OpCode"    : 1,
+    	"R"         : 255,  
+    	"G"         : 50,  
+    	"B"         : 100      
+    }
+}
+
+
+/*****/
+client read command:
+{
+    "RGB" : 
+    {
+    	"ID"        : 1,     
+    	"OpCode"    : 2,
+    	"R"         : 0,  
+    	"G"         : 0,  
+    	"B"         : 0    
+    }
+}
+
+Read Nano_Demo_1 RGB status, will ignore "R" "G" "B" params.
+Then will receive:
+{
+    "RGB" : 
+    {
+    	"ID"        : 1,     
+    	"OpCode"    : 0,
+    	"R"         : 255,  
+    	"G"         : 50,  
+    	"B"         : 100      
+    }
+}
+
+/*****/         
+If RGB status change, will note client:
+{
+"RGB":
+{
+"ID":1,
+"OpCode":0,
+"R":255,
+"G":50,
+"B":100
+}
+}
+
+ 
+ 
+ 
+ 
+           
