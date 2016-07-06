@@ -64,7 +64,7 @@ You can use either Windows, OSX or Linux to compile your firmware and use the bo
 
 ## Bluetooth Stack
 
-The SDK comes with a closed source Bluetooth Stack, if you want an open source stack, you can try [BTstack](https://github.com/bluekitchen/btstack/tree/ble-api-cleanup/port/wiced).
+The SDK comes with a closed source Bluetooth Stack, which has some limitations. If you want an open source stack, you can try [BTstack](https://github.com/bluekitchen/btstack/tree/master/port/wiced). For the older WICED 3.3.1 you need to use the `ble-api-cleanup` [branch](https://github.com/bluekitchen/btstack/tree/ble-api-cleanup/port/wiced).
 
 
 ## Limitations
