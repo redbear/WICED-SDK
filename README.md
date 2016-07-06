@@ -85,7 +85,4 @@ The SDK comes with a closed source Bluetooth Stack, which has some limitations. 
 ## Resources
 
 * [Broadcom WICED WiFi](https://community.broadcom.com/community/wiced-wifi)
-* [BTstack for WICED](https://github.com/bluekitchen/btstack/tree/ble-api-cleanup/port/wiced)
-
-
-
+* [BTstack for WICED](https://github.com/bluekitchen/btstack/tree/master/port/wiced)
