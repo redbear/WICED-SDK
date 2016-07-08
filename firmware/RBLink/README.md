@@ -31,7 +31,7 @@ The preloaded firmware is protected by default, you need to unlock it before usi
 
 * To test the onboard RGB LED:
 
-		$ ./make rbl_rgb-RB_DUO JTAG=RBLINK download run
+		$ ./make redbear.rgb-RB_DUO JTAG=RBLINK download run
 
 	You will see the RGB changes color alternatively, also press the 'SETUP' button to see the effect.
 
