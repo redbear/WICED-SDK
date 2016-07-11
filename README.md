@@ -1,7 +1,7 @@
 
 ## WICED SDK Add-on for RedBear Duo
 
-The [RedBear Duo](http://redbear.cc/duo/) supports Broadcom WICED WiFi SDK by adding this add-on. The Duo IoT development kit has two boards, the Duo and the RBLink.
+The [RedBear Duo](http://redbear.cc/duo/) supports Cypress WICED WiFi SDK by adding this add-on. The Duo IoT development kit has two boards, the Duo and the RBLink.
 
 It is highly recommended you to use the RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
 
@@ -37,15 +37,15 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 ## Download WICED SDK
 
-To use the Duo with WICED SDK 3.5.2:
+To use the Duo with WICED SDK 3.7.0:
 
-* Download Broadcom [WICED-SDK-3.5.2](https://community.broadcom.com/docs/DOC-2780) from
+* Download Cypress [WICED-SDK-3.7.0](https://community.cypress.com/docs/DOC-3122) from
 
-	* https://community.broadcom.com/docs/DOC-2780
+	* https://community.cypress.com/docs/DOC-3122
 
-* Unzip WICED-SDK-3.5.2 to your local file-system
+* Unzip WICED-SDK-3.7.0 to your local file-system
 
-* Download and copy the files in this add-on package to the WICED-SDK-3.5.2 folder, replace the original files.
+* Download and copy the files in this add-on package to the WICED-SDK-3.7.0 folder, replace the original files.
 
 For MFi developer, you need to apply from Braoadcom for another SDK.
 
@@ -84,5 +84,5 @@ The SDK comes with a closed source Bluetooth Stack, which has some limitations. 
 
 ## Resources
 
-* [Broadcom WICED WiFi](https://community.broadcom.com/community/wiced-wifi)
+* [Cypress WICED WiFi](https://community.cypress.com/community/wiced-wifi)
 * [BTstack for WICED](https://github.com/bluekitchen/btstack/tree/master/port/wiced)
