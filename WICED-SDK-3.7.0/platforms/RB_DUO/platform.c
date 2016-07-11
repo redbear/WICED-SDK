@@ -475,6 +475,23 @@ gpio_button_t platform_gpio_buttons[] =
     },
 };
 
+#if 0
+/* MFI-related variables */
+const wiced_i2c_device_t auth_chip_i2c_device =
+{
+    .port          = WICED_I2C_1,
+    .address       = 0x11,
+    .address_width = I2C_ADDRESS_WIDTH_7BIT,
+    .speed_mode    = I2C_STANDARD_SPEED_MODE,
+};
+
+const platform_mfi_auth_chip_t platform_auth_chip =
+{
+    .i2c_device = &auth_chip_i2c_device,
+    .reset_pin  = WICED_GPIO_NONE
+};
+#endif
+
 /******************************************************
  *               Function Definitions
  ******************************************************/
