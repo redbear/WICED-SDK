@@ -47,7 +47,7 @@ To use the Duo with WICED SDK 3.7.0:
 
 * Download and copy the files in this add-on package to the WICED-SDK-3.7.0 folder, replace the original files.
 
-For MFi developer, you need to apply from Braoadcom for another SDK.
+For MFi developer, you need to apply from Cypress for another SDK.
 
 
 ## Memory Map
