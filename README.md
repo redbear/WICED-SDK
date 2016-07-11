@@ -5,7 +5,23 @@ The [RedBear Duo](http://redbear.cc/duo/) supports Cypress WICED WiFi SDK by add
 
 It is highly recommended you to use the RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
 
-Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit).
+Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-SDK-3.7.0/platforms/RB_DUO/platform.c" or "WICED-SDK-3.7.0/platforms/RB_DUO_ext/platform.c":
+
+	#if 0
+	/* MFI-related variables */
+	const wiced_i2c_device_t auth_chip_i2c_device =
+	{
+	    .port          = WICED_I2C_1,
+	    .address       = 0x11,
+	    .address_width = I2C_ADDRESS_WIDTH_7BIT,
+	    .speed_mode    = I2C_STANDARD_SPEED_MODE,
+	};
+	const platform_mfi_auth_chip_t platform_auth_chip =
+	{
+	    .i2c_device = &auth_chip_i2c_device,
+	    .reset_pin  = WICED_GPIO_NONE
+	};
+	#endif
 
 *** Note: There is a known issue (bug) with OSX 10.11 (Apple is rewritting the USB stack), the RBLink will not work properly. As a workaround, please use bootloader DFU mode, RBLink MSD drag & drop method, OSX 10.10 or Windows at this moment.
 
