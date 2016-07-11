@@ -1,1 +1,0 @@
-Add "RB_DUO" and "RB_DUO_ext" to the makefile variable "VALID_PLATFORMS"
