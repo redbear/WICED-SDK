@@ -146,7 +146,7 @@ typedef enum
  *                    Constants
  ******************************************************/
 
-#define WICED_PLATFORM_BUTTON_COUNT  ( 2 )
+#define WICED_PLATFORM_BUTTON_COUNT        ( 1 )
 
 /* UART port used for standard I/O */
 #define STDIO_UART                         ( WICED_UART_1 )
