@@ -25,6 +25,11 @@ BT_CHIP_REVISION := A1
 BT_MODE          ?= HCI
 BT_CHIP_XTAL_FREQUENCY := 26MHz
 
+# enable BT application for BCMUSI22 platfrom
+ifneq ($(filter BCM9$(WLAN_CHIP)%,$(VALID_PLATFORMS)),)
+$(eval VALID_PLATFORMS += $(PLATFORM))
+endif # check valid platforms
+
 
 WIFI_FIRMWARE_IN_SPI_FLASH = NO
 #if YES, USES_RESOURCE_FILESYSTEM also must be define in platform_config.h
