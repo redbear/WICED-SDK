@@ -6,7 +6,7 @@ This guide provides information for loading WICED firmware using the bootloader 
 
 ## Prerequisites
 
-Follow [this](https://github.com/redbear/Duo/blob/master/docs/dfu.md) to install the 'dfu-util' tool.
+Follow [this](https://github.com/redbear/Duo/blob/master/docs/dfu-util_installation_guide.md) to install the 'dfu-util' tool.
 
 
 ## Updating Firmware
