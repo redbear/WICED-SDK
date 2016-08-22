@@ -53,6 +53,6 @@ The preloaded firmware is protected by default, you need to unlock it before usi
 
 * You will see the 'RBLink' drive again in your computer.
 
-* Drag & drop the 'rbl_rgb-RB_DUO.bin_MSD.bin' to the drive. 
+* Drag & drop the 'redbear.rgb-RB_DUO.bin_MSD.bin' to the drive. 
 
 * You will see the RGB changes color alternatively, also press the 'SETUP' button to see the effect.
