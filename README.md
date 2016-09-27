@@ -23,9 +23,7 @@ Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenti
 	};
 	#endif
 
-*** Note: There is a known issue (bug) with OSX 10.11 (Apple is rewritting the USB stack), the RBLink will not work properly. As a workaround, please use bootloader DFU mode, RBLink MSD drag & drop method, OSX 10.10 or Windows at this moment.
-
-*** Update: Apple replied and will fix this in OSX version 10.11.4 (tested on 10.11.4 beta and it works).
+*** Note: The RBLink will only work with OSX version 10.11.4 or above.
 
 The Duo contains a ST32F205 MCU runs at 120 MHz, AP6212A WiFi (802.11 b/g/n 2.4GHz) + Bluetooth (4.1) combo module and an onboard 2 MB SPI Flash. The MCU has 1 MB Flash and 128 KB SRAM. The wireless module built around Broadcom BCM43438 A1 chip.
 
@@ -49,6 +47,10 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 	* http://www.st.com/web/en/catalog/tools/PF260219
 
 * For OSX and Linux, no driver is required.
+
+* If you need to solder the CoProcessor (CoP) for MFi projects, the CoP has a **BLACK** dot at the corner and a **WHITE** dot at the RBLink CoP area, this indicates the direction for soldering the CoP to the RBLink board. See the following diagram. The jumper J8 is set to high for the I2C address.
+
+![image](docs/images/CoP.png)
 
 
 ## Download WICED SDK
