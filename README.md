@@ -5,7 +5,7 @@ The [RedBear Duo](http://redbear.cc/duo/) supports Cypress WICED WiFi SDK by add
 
 It is highly recommended you to use the RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
 
-Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-SDK-3.7.0/platforms/RB_DUO/platform.c" or "WICED-SDK-3.7.0/platforms/RB_DUO_ext/platform.c":
+Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-Studio-4.0/43xxx_Wi-Fi/platforms/RB_DUO/platform.c" or "WICED-Studio-4.0/43xxx_Wi-Fi/platforms/RB_DUO_ext/platform.c":
 
 	#if 0
 	/* MFI-related variables */
@@ -55,15 +55,15 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 ## Download WICED SDK
 
-To use the Duo with WICED SDK 3.7.0:
+To use the Duo with WICED-Studio-4.0:
 
-* Download Cypress [WICED-SDK-3.7.0](https://community.cypress.com/docs/DOC-3122) from
+* Download Cypress [WICED-SDK-Studio-4.0](https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation) from
 
-	* https://community.cypress.com/docs/DOC-3122
+	* https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation
 
-* Unzip WICED-SDK-3.7.0 to your local file-system
+* Install WICED-Studio-4.0 to your local file-system
 
-* Download and copy the files in this add-on package to the WICED-SDK-3.7.0 folder, replace the original files.
+* Download and copy the files in this add-on package to the WICED-Studio-4.0 folder, replace the original files.
 
 For MFi developer, you need to apply from Cypress for another SDK.
 
