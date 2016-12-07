@@ -1,5 +1,5 @@
 /*
- * Copyright 2015, RedBear
+ * Copyright 2016, RedBear
  * All Rights Reserved.
  *
  * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
@@ -16,17 +16,18 @@
 #include "platform_init.h"
 #include "platform_isr.h"
 #include "platform_peripheral.h"
+#include "platform_bluetooth.h"
 #include "wwd_platform_common.h"
 #include "wwd_rtos_isr.h"
 #include "wiced_defaults.h"
 #include "wiced_platform.h"
-#include "platform_bluetooth.h"
+#include "platform_mfi.h"
+#include "platform_button.h"
+#include "gpio_button.h"
 
 /******************************************************
  *                      Macros
  ******************************************************/
-#define PLATFORM_FACTORY_RESET_CHECK_PERIOD     ( 100 )
-#define PLATFORM_FACTORY_RESET_TIMEOUT          ( 5000 )
 
 /******************************************************
  *                    Constants
@@ -362,7 +363,6 @@ static platform_uart_config_t stdio_config =
 const platform_gpio_t wifi_control_pins[] =
 {
     [WWD_PIN_POWER      ] = { GPIOC,  1 },
-    [WWD_PIN_RESET      ] = { GPIOC,  1 },
 #if defined ( WICED_USE_WIFI_32K_CLOCK_MCO )
     [WWD_PIN_32K_CLK    ] = { GPIOA,  8 },
 #else
@@ -462,6 +462,17 @@ const platform_bluetooth_config_t wiced_bt_config =
 {
     .patchram_download_mode      = PATCHRAM_DOWNLOAD_MODE_MINIDRV_CMD,
     .patchram_download_baud_rate = 115200,
+    .featured_baud_rate          = 115200
+};
+
+gpio_button_t platform_gpio_buttons[] =
+{
+    [PLATFORM_BUTTON_1] =
+    {
+        .polarity   = WICED_ACTIVE_LOW,
+        .gpio       = WICED_BUTTON1,
+        .trigger    = IRQ_TRIGGER_BOTH_EDGES,
+    },
 };
 
 /******************************************************
@@ -515,35 +526,49 @@ void platform_init_external_devices( void )
 }
 
 /* Checks if a factory reset is requested */
-wiced_bool_t platform_check_factory_reset( void )
+uint32_t  platform_get_factory_reset_button_time ( uint32_t max_time )
 {
-    uint32_t factory_reset_counter = 0;
+    uint32_t button_press_timer = 0;
     int led_state = 0;
-    while (  ( 0 == platform_gpio_input_get( &platform_gpio_pins[ WICED_BUTTON1 ] ) )
-          && ( ( factory_reset_counter += PLATFORM_FACTORY_RESET_CHECK_PERIOD ) <= PLATFORM_FACTORY_RESET_TIMEOUT )
-          && ( WICED_SUCCESS == (wiced_result_t)host_rtos_delay_milliseconds( PLATFORM_FACTORY_RESET_CHECK_PERIOD ) )
-          )
-    {
-        /* Factory reset button is being pressed. */
-        /* User Must press it for 5 seconds to ensure it was not accidental */
-        /* Toggle LED every 100ms */
 
+    /* Initialise input */
+     platform_gpio_init( &platform_gpio_pins[ PLATFORM_FACTORY_RESET_BUTTON_GPIO ], INPUT_PULL_UP );
+
+     while ( (PLATFORM_FACTORY_RESET_PRESSED_STATE == platform_gpio_input_get(&platform_gpio_pins[ PLATFORM_FACTORY_RESET_BUTTON_GPIO ])) )
+    {
+         /* How long is the "Factory Reset" button being pressed. */
+         host_rtos_delay_milliseconds( PLATFORM_FACTORY_RESET_CHECK_PERIOD );
+
+         /* Toggle LED every PLATFORM_FACTORY_RESET_CHECK_PERIOD  */
         if ( led_state == 0 )
         {
-            platform_gpio_output_high( &platform_gpio_pins[ BOOTLOADER_LED_GPIO ] );
+            platform_gpio_output_high( &platform_gpio_pins[ PLATFORM_FACTORY_RESET_LED_GPIO ] );
             led_state = 1;
         }
         else
         {
-            platform_gpio_output_low( &platform_gpio_pins[ BOOTLOADER_LED_GPIO ] );
+            platform_gpio_output_low( &platform_gpio_pins[ PLATFORM_FACTORY_RESET_LED_GPIO ] );
             led_state = 0;
         }
-        if ( factory_reset_counter == 5000 )
+
+        button_press_timer += PLATFORM_FACTORY_RESET_CHECK_PERIOD;
+        if ((max_time > 0) && (button_press_timer >= max_time))
         {
-            return WICED_TRUE;
+            break;
         }
     }
-    return WICED_FALSE;
+
+     /* turn off the LED */
+     if (PLATFORM_FACTORY_RESET_LED_ON_STATE == WICED_ACTIVE_HIGH)
+     {
+         platform_gpio_output_low( &platform_gpio_pins[ PLATFORM_FACTORY_RESET_LED_GPIO ] );
+     }
+     else
+     {
+         platform_gpio_output_high( &platform_gpio_pins[ PLATFORM_FACTORY_RESET_LED_GPIO ] );
+     }
+
+    return button_press_timer;
 }
 
 /******************************************************

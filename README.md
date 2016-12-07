@@ -39,15 +39,17 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 To use the Duo with WICED SDK 3.3.1:
 
-* Download Broadcom WICED-SDK-3.3.1 from:
+* Download Broadcom [WICED-SDK-3.3.1](http://community.broadcom.com/docs/DOC-2312) from
 
 	* http://community.broadcom.com/docs/DOC-2312
 
 * Unzip WICED-SDK-3.3.1 to your local file-system
 
-* Download and copy the files in this add-on package to the WICED-SDK-3.3.1 and unzip and replace the original files
+* Download and copy the files in this add-on package to the WICED-SDK-3.3.1 folder, replace the original files.
 
 *** Note: The add-on package for the latest version of WICED-SDK-3.5.2 is ready on Github. Please switch to the master branch to get it.
+
+For MFi developer, you need to apply from Braoadcom for another SDK.
 
 
 ## Memory Map

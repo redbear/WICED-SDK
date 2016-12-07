@@ -1,5 +1,5 @@
 /*
- * Copyright 2015, RedBear
+ * Copyright 2016, RedBear
  * All Rights Reserved.
  *
  * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
@@ -96,9 +96,9 @@ typedef enum
     WICED_PWM_12,
     WICED_PWM_13,
 
-	WICED_PWM_14,
-	WICED_PWM_15,
-	WICED_PWM_16,
+    WICED_PWM_14,
+    WICED_PWM_15,
+    WICED_PWM_16,
 
     WICED_PWM_MAX, /* Denotes the total number of PWM port aliases. Not a valid PWM alias */
     WICED_PWM_32BIT = 0x7FFFFFFF,
@@ -135,9 +135,18 @@ typedef enum
     WICED_UART_32BIT = 0x7FFFFFFF,
 } wiced_uart_t;
 
+/* Logical Button-ids which map to phyiscal buttons on the board */
+typedef enum
+{
+    PLATFORM_BUTTON_1,
+    PLATFORM_BUTTON_MAX, /* Denotes the total number of Buttons on the board. Not a valid Button Alias */
+} platform_button_t;
+
 /******************************************************
  *                    Constants
  ******************************************************/
+
+#define WICED_PLATFORM_BUTTON_COUNT  ( 2 )
 
 /* UART port used for standard I/O */
 #define STDIO_UART                         ( WICED_UART_1 )
@@ -163,13 +172,15 @@ typedef enum
 #define WICED_LED3_JOINS_PWM               ( WICED_PWM_16 )
 //#define WICED_THERMISTOR_JOINS_ADC       ( WICED_ADC_3 )
 
-/*  Bootloader LED D1 */
-#define BOOTLOADER_LED_GPIO                ( WICED_LED3 )
-#define BOOTLOADER_LED_ON_STATE            ( WICED_ACTIVE_LOW )
+/*  Bootloader OTA/OTA2 LED to flash while "Factory Reset" button held */
+#define PLATFORM_FACTORY_RESET_LED_GPIO     ( WICED_LED3 )
+#define PLATFORM_FACTORY_RESET_LED_ON_STATE ( WICED_ACTIVE_LOW )
 
- /* Bootloader Button S1 */
-#define BOOTLOADER_BUTTON_GPIO             ( WICED_BUTTON1 )
-#define BOOTLOADER_BUTTON_PRESSED_STATE    ( WICED_ACTIVE_LOW )
+/* Bootloader OTA and OTA2 factory reset during settings */
+#define PLATFORM_FACTORY_RESET_BUTTON_GPIO   ( WICED_BUTTON1 )
+#define PLATFORM_FACTORY_RESET_PRESSED_STATE (   0  )
+#define PLATFORM_FACTORY_RESET_CHECK_PERIOD  (  100 )
+#define PLATFORM_FACTORY_RESET_TIMEOUT       ( 5000 )
 
 #include "platform_alias.h"
 

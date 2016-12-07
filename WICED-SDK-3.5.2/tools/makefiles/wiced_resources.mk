@@ -10,7 +10,7 @@
 
 # filters for resources
 TEXT_FILTERS   := %.html %.htm %.txt %.eml %.js %.css %.dat %.cer %.pem %.json %.xml %.py %.key
-BINARY_FILTERS := %.jpg %.jpeg %.png %.ico %.gif %.bin
+BINARY_FILTERS := %.jpg %.jpeg %.png %.ico %.gif %.bin %.flac
 
 STAGING_DIR ?= $(OUTPUT_DIR)/resources/Staging/
 FS_IMAGE    ?= $(OUTPUT_DIR)/resources/filesystem.bin
@@ -123,16 +123,16 @@ RESOURCE_DOWNLOADER_TARGET := $(if $(findstring sflash_write,$(APP)),,external_r
 RESOURCE_DOWNLOAD = download_all_resources
 
 download_all_resources: $(RESOURCES_DEPENDENCY) $(RESOURCE_DOWNLOADER_TARGET)
-	 $(OPENOCD_FULL_NAME) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $($(SOURCE_ROOT)apps/waf/sflash_write/sflash_write.tcl -c "sflash_write_file $(FS_IMAGE) 0x0 $(PLATFORM_FULL)-$(BUS) 1 0" -c shutdown
+	 $(OPENOCD_FULL_NAME) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $($(SOURCE_ROOT)apps/waf/sflash_write/sflash_write.tcl -c "sflash_write_file $(FS_IMAGE) 0x0 $(PLATFORM)-$(BUS) 1 0" -c shutdown
 
 $(FS_IMAGE): $(RESOURCES_DEPENDENCY)
 	$(COMMON_TOOLS_PATH)mk_wicedfs32 $(FS_IMAGE) $(STAGING_DIR)
 
 
 
-SFLASH_WRITE_TARGET := waf.sflash_write-NoOS-NoNS-$(PLATFORM_FULL)-$(BUS)
+SFLASH_WRITE_TARGET := waf.sflash_write-NoOS-$(PLATFORM)-$(BUS)
 SFLASH_WRITE_LOG_FILE ?= build/sflash_write.log
-SFLASH_WRITE_OUTFILE := $(BUILD_DIR)/$(call CONV_COMP,$(subst .,/,$(SFLASH_WRITE_TARGET)))/binary/$(call CONV_COMP,$(subst .,/,$(SFLASH_WRITE_TARGET)))
+SFLASH_WRITE_OUTFILE := $(BUILD_DIR)/$(SFLASH_WRITE_TARGET)/binary/$(SFLASH_WRITE_TARGET)
 ifneq ($(VERBOSE),1)
 SFLASH_WRITE_REDIRECT	= > $(SFLASH_WRITE_LOG_FILE)
 endif

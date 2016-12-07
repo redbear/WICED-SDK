@@ -1,5 +1,5 @@
 /*
- * Copyright 2015, RedBear
+ * Copyright 2016, RedBear
  * All Rights Reserved.
  *
  * This is UNPUBLISHED PROPRIETARY SOURCE CODE of RedBear;
