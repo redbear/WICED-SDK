@@ -1,11 +1,13 @@
 
 ## WICED SDK Add-on for RedBear Duo
 
+**Note: Since the WICED-SDK-4.1, after applying the patch, the memory map of Duo has been changed. See the following memory map. If you are going to develop WICED applications cooperating with the Particle bootloader, only if the Particle bootloader version is updated to 5 or above (by updating the Particle system firmware v0.3.0 or above, or by RBLink), then you can applying the patch for the WICED-SDK-4.1 or above. If the Particle bootloader version is below 5, please checkout other branch and apply that patch to the corresponding WICED SDK.**
+
 The [RedBear Duo](http://redbear.cc/duo/) supports Cypress WICED WiFi SDK by adding this add-on. The Duo IoT development kit has two boards, the Duo and the RBLink.
 
 It is highly recommended you to use the RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
 
-Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-Studio-4.0/43xxx_Wi-Fi/platforms/RB_DUO/platform.c" or "WICED-Studio-4.0/43xxx_Wi-Fi/platforms/RB_DUO_ext/platform.c":
+Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-Studio-4.1/43xxx_Wi-Fi/platforms/RB_DUO/platform.c" or "WICED-Studio-4.1/43xxx_Wi-Fi/platforms/RB_DUO_ext/platform.c":
 
 	#if 0
 	/* MFI-related variables */
@@ -23,7 +25,7 @@ Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenti
 	};
 	#endif
 
-*** Note: The RBLink will only work with OSX version 10.11.4 or above.
+**Note: The RBLink will only work with OSX version 10.11.4 or above.**
 
 The Duo contains a ST32F205 MCU runs at 120 MHz, AP6212A WiFi (802.11 b/g/n 2.4GHz) + Bluetooth (4.1) combo module and an onboard 2 MB SPI Flash. The MCU has 1 MB Flash and 128 KB SRAM. The wireless module built around Broadcom BCM43438 A1 chip.
 
@@ -55,15 +57,18 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 ## Download WICED SDK
 
-To use the Duo with WICED-Studio-4.0:
+To use the Duo with WICED-Studio-4.1:
 
-* Download Cypress [WICED-SDK-Studio-4.0](https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation) from
+* Download Cypress WICED-SDK-Studio-4.1:
 
-	* https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation
+    * [WICED Studio 4.1.0 IDE Installer (Windows)](https://community.cypress.com/docs/DOC-3751)
+    * [WICED Studio 4.1.0 (OSX)](https://community.cypress.com/docs/DOC-3753)
+    * [WICED Studio 4.1.0 (Linux 64-bit)](https://community.cypress.com/docs/DOC-3754)
+    * [WICED Studio 4.1.0 (Linux 32-bit)](https://community.cypress.com/docs/DOC-3755)
 
-* Install WICED-Studio-4.0 to your local file-system
+* Install WICED-Studio-4.1 to your local file-system
 
-* Download and copy the files in this add-on package to the WICED-Studio-4.0 folder, replace the original files.
+* Download and copy the `WICED-Studio-4.1` folder in this patch to where the WICED-Studio-4.1 is installed, replace the original files.
 
 For MFi developer, you need to apply from Cypress for another SDK.
 
