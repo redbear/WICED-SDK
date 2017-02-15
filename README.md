@@ -1,7 +1,7 @@
 
 ## WICED SDK Add-on for RedBear Duo
 
-**Note: Since the WICED-SDK-4.1, after applying the patch, the memory map of Duo has been changed. See the following memory map. If you are going to develop WICED applications cooperating with the Particle bootloader, only if the Particle bootloader version is updated to 5 or above (by updating the Particle system firmware v0.3.0 or above, or by RBLink), then you can applying the patch for the WICED-SDK-4.1 or above. If the Particle bootloader version is below 5, please checkout other branch and apply that patch to the corresponding WICED SDK.**
+**Note: Since the WICED-SDK-4.1, after applying the patch, the memory map of Duo has been changed. See the following memory map. If you are going to deploy WICED applications and WICED DCT via the Particle bootloader, only if the Particle bootloader version is updated to 5 or above (by updating the Particle system firmware v0.3.0 or above, or by RBLink if you have), then you can apply the patch of the WICED-SDK-4.1 or above, otherwise, the older bootloader will jump to where the address mismatches the application start address. If the Particle bootloader version is below 5, please checkout other branch and apply the patch of the corresponding WICED SDK.**
 
 The [RedBear Duo](http://redbear.cc/duo/) supports Cypress WICED WiFi SDK by adding this add-on. The Duo IoT development kit has two boards, the Duo and the RBLink.
 
