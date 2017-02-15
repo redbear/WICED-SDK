@@ -1,5 +1,5 @@
 #
-# Copyright 2016, Cypress Semiconductor Corporation or a subsidiary of 
+# Copyright 2017, Cypress Semiconductor Corporation or a subsidiary of 
  # Cypress Semiconductor Corporation. All Rights Reserved.
  # This software, including source code, documentation and related
  # materials ("Software"), is owned by Cypress Semiconductor Corporation

@@ -1,5 +1,5 @@
 #
-# Copyright 2016, Cypress Semiconductor Corporation or a subsidiary of 
+# Copyright 2017, Cypress Semiconductor Corporation or a subsidiary of 
  # Cypress Semiconductor Corporation. All Rights Reserved.
  # This software, including source code, documentation and related
  # materials ("Software"), is owned by Cypress Semiconductor Corporation
@@ -152,7 +152,6 @@ run: $(SHOULD_I_WAIT_FOR_DOWNLOAD)
 copy_output_for_eclipse: build_done copy_bootloader_output_for_eclipse
 	$(QUIET)$(call MKDIR, $(BUILD_DIR)/eclipse_debug/)
 	$(QUIET)$(CP) $(LINK_OUTPUT_FILE) $(BUILD_DIR)/eclipse_debug/last_built.elf
-	
 
 combine_bins: build_done
 	$(ECHO) Merge all bin files into a single bin for MSD upload
@@ -164,7 +163,6 @@ else
 	$(CAT) $(BOOTLOADER_OUTFILE)_PAD.bin $(FINAL_DCT_FILE)_PAD.bin $(FINAL_OUTPUT_FILE) > $(FINAL_OUTPUT_FILE)_MSD.bin
 endif
 	$(ECHO) Location: $(FINAL_OUTPUT_FILE)_MSD.bin
-
 
 debug: $(BUILD_STRING) $(SHOULD_I_WAIT_FOR_DOWNLOAD)
 	$(QUIET)$(GDB_COMMAND) $(LINK_OUTPUT_FILE) -x .gdbinit_attach
