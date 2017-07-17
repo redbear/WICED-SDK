@@ -49,7 +49,7 @@ RESOURCE_FILENAME      =$(addprefix $(OUTPUT_DIR)/resources/,$(addsuffix .c,$(su
 # Creates a variable name that will be used for a resource from it's filename
 # slashes are converted to _DIR_ and dots to underscores
 # $(1) is resource filename in the resource directory
-RESOURCE_VARIABLE_NAME =$(if $(findstring firmware,$(1)),wifi_firmware_image,$(addprefix resources_,$(subst /,_DIR_,$(subst .,_,$(subst $(SOURCE_ROOT)resources/,,$(1))))))
+RESOURCE_VARIABLE_NAME = $(addprefix resources_,$(subst /,_DIR_,$(subst -,_,$(subst .,_,$(subst $(SOURCE_ROOT)resources/,,$(1))))))
 
 BIN_TO_RES_SCRIPT  := $(TOOLS_ROOT)/text_to_c/bin_to_resource_c.pl
 TEXT_TO_RES_SCRIPT := $(TOOLS_ROOT)/text_to_c/text_to_resource_c.pl

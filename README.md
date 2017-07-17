@@ -57,18 +57,15 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 ## Download WICED SDK
 
-To use the Duo with WICED-Studio-4.1:
+To use the Duo with WICED-Studio-5.0.1:
 
-* Download Cypress WICED-SDK-Studio-4.1:
+* Download Cypress WICED SDK:
 
-    * [WICED Studio 4.1.0 IDE Installer (Windows)](https://community.cypress.com/docs/DOC-3751)
-    * [WICED Studio 4.1.0 (OSX)](https://community.cypress.com/docs/DOC-3753)
-    * [WICED Studio 4.1.0 (Linux 64-bit)](https://community.cypress.com/docs/DOC-3754)
-    * [WICED Studio 4.1.0 (Linux 32-bit)](https://community.cypress.com/docs/DOC-3755)
+    * [WICED Studio 5.0.1 IDE Installer](https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation)
 
-* Install WICED-Studio-4.1 to your local file-system
+* Install it to your local file-system
 
-* Download and copy the `WICED-Studio-4.1` folder in this patch to where the WICED-Studio-4.1 is installed, replace the original files.
+* Download and copy the `WICED-Studio-5.0` folder in this patch to where the WICED-Studio-5.0.1 is installed, replace the original files.
 
 For MFi developer, you need to apply from Cypress for another SDK.
 
