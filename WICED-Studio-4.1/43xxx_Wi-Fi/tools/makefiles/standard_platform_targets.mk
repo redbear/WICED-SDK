@@ -155,7 +155,7 @@ copy_output_for_eclipse: build_done copy_bootloader_output_for_eclipse
 
 combine_bins: build_done
 	$(ECHO) Merge all bin files into a single bin for MSD upload
-	$(OBJCOPY) -I binary -O binary --pad-to 0x4000 $(BOOTLOADER_OUTFILE).bin $(BOOTLOADER_OUTFILE)_PAD.bin
+	$(OBJCOPY) -I binary -O binary --pad-to 0x8000 $(BOOTLOADER_OUTFILE).bin $(BOOTLOADER_OUTFILE)_PAD.bin
 	$(OBJCOPY) -I binary -O binary --pad-to 0x8000 $(FINAL_DCT_FILE) $(FINAL_DCT_FILE)_PAD.bin
 ifeq ($(HOST_OS),Win32)
 	copy /b $(subst /,\,$(BOOTLOADER_OUTFILE))_PAD.bin + $(subst /,\,$(FINAL_DCT_FILE))_PAD.bin + $(subst /,\,$(FINAL_OUTPUT_FILE)) $(subst /,\,$(FINAL_OUTPUT_FILE))_MSD.bin
