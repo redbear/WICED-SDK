@@ -158,6 +158,7 @@ typedef enum
 #define DAC_EXTERNAL_OSCILLATOR
 
 /* Components connected to external I/Os */
+#define PLATFORM_LED_COUNT                 ( 3 )
 #define WICED_LED1                         ( WICED_GPIO_19 )
 #define WICED_LED2                         ( WICED_GPIO_20 )
 #define WICED_LED3                         ( WICED_GPIO_21 )

@@ -475,6 +475,13 @@ gpio_button_t platform_gpio_buttons[] =
     },
 };
 
+const wiced_gpio_t platform_gpio_leds[PLATFORM_LED_COUNT] =
+{
+     [WICED_LED_INDEX_1] = WICED_LED1,
+     [WICED_LED_INDEX_2] = WICED_LED2,
+     [WICED_LED_INDEX_3] = WICED_LED3,
+};
+
 #if 0
 /* MFI-related variables */
 const wiced_i2c_device_t auth_chip_i2c_device =
@@ -495,6 +502,36 @@ const platform_mfi_auth_chip_t platform_auth_chip =
 /******************************************************
  *               Function Definitions
  ******************************************************/
+
+/* LEDs on this platform are active LOW */
+platform_result_t platform_led_set_state(int led_index, int off_on )
+{
+    if ((led_index >= 0) && (led_index < PLATFORM_LED_COUNT))
+    {
+        switch (off_on)
+        {
+            case WICED_LED_OFF:
+                platform_gpio_output_high( &platform_gpio_pins[platform_gpio_leds[led_index]] );
+                break;
+            case WICED_LED_ON:
+                platform_gpio_output_low( &platform_gpio_pins[platform_gpio_leds[led_index]] );
+                break;
+        }
+        return PLATFORM_SUCCESS;
+    }
+    return PLATFORM_BADARG;
+}
+
+void platform_led_init( void )
+{
+    /* Initialise LEDs and turn off by default */
+    platform_gpio_init( &platform_gpio_pins[WICED_LED1], OUTPUT_PUSH_PULL );
+    platform_gpio_init( &platform_gpio_pins[WICED_LED2], OUTPUT_PUSH_PULL );
+    platform_gpio_init( &platform_gpio_pins[WICED_LED3], OUTPUT_PUSH_PULL );
+    platform_led_set_state(WICED_LED_INDEX_1, WICED_LED_OFF);
+    platform_led_set_state(WICED_LED_INDEX_2, WICED_LED_OFF);
+    platform_led_set_state(WICED_LED_INDEX_3, WICED_LED_OFF);
+ }
 
 void platform_init_peripheral_irq_priorities( void )
 {
@@ -529,12 +566,7 @@ void platform_init_external_devices( void )
     platform_gpio_init( &platform_gpio_pins[WICED_BUTTON1], INPUT_PULL_UP );
 
     /* Initialise LEDs and turn off by default */
-    platform_gpio_init( &platform_gpio_pins[WICED_LED1], OUTPUT_PUSH_PULL );
-    platform_gpio_init( &platform_gpio_pins[WICED_LED2], OUTPUT_PUSH_PULL );
-    platform_gpio_init( &platform_gpio_pins[WICED_LED3], OUTPUT_PUSH_PULL );
-    platform_gpio_output_high( &platform_gpio_pins[WICED_LED1] );
-    platform_gpio_output_high( &platform_gpio_pins[WICED_LED2] );
-    platform_gpio_output_high( &platform_gpio_pins[WICED_LED3] );
+    platform_led_init();
 
 #ifndef WICED_DISABLE_STDIO
     /* Initialise UART standard I/O */
