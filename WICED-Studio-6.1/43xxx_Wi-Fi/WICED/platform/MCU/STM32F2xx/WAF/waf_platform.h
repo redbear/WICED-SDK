@@ -1,5 +1,5 @@
 /*
- * Copyright 2017, Cypress Semiconductor Corporation or a subsidiary of 
+ * Copyright 2018, Cypress Semiconductor Corporation or a subsidiary of 
  * Cypress Semiconductor Corporation. All Rights Reserved.
  * 
  * This software, associated documentation and materials ("Software"),

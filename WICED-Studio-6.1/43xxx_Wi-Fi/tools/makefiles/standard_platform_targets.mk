@@ -1,5 +1,5 @@
 #
-# Copyright 2017, Cypress Semiconductor Corporation or a subsidiary of 
+# Copyright 2018, Cypress Semiconductor Corporation or a subsidiary of 
  # Cypress Semiconductor Corporation. All Rights Reserved.
  # This software, including source code, documentation and related
  # materials ("Software"), is owned by Cypress Semiconductor Corporation
@@ -31,6 +31,11 @@
 #
 
 .PHONY: bootloader download_bootloader no_dct download_dct download
+.PHONY: package package_bootloader package_dct package_app
+
+# Include packaging rules
+PACKAGE_OUTPUT_DIR := $(OUTPUT_DIR)
+-include $(MAKEFILES_PATH)/wiced_package.mk
 
 BOOTLOADER_TARGET := waf.bootloader-NoOS-$(PLATFORM)
 BOOTLOADER_OUTFILE := $(BUILD_DIR)/$(BOOTLOADER_TARGET)/binary/$(BOOTLOADER_TARGET)
@@ -44,6 +49,12 @@ APPS_LUT_DOWNLOAD_DEP :=
 #SFLASH_WRITER_APP Required by  download_apps
 SFLASH_APP_PLATFROM_BUS := $(PLATFORM)-$(BUS)
 SFLASH_APP_BCM4390 := 0
+PACKAGE_SFLASH_FLAG := 0
+
+ifeq ($(RESOURCES_LOCATION), RESOURCES_IN_WICEDFS)
+FS_IMAGE    := $(OUTPUT_DIR)/filesystem.bin
+FILESYSTEM_IMAGE := $(FS_IMAGE)
+endif
 
 ifeq (,$(and $(OPENOCD_PATH),$(OPENOCD_FULL_NAME)))
 	$(error Path to OpenOCD has not been set using OPENOCD_PATH and OPENOCD_FULL_NAME)
@@ -83,10 +94,34 @@ download_bootloader: bootloader display_map_summary
 ifeq ($(ALWAYS_DOWNLOAD_COMPONENTS),1)
 	$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "flash write_image erase $(BOOTLOADER_OUTFILE).stripped$(LINK_OUTPUT_SUFFIX)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) Download complete && $(ECHO_BLANK_LINE) || $(ECHO) "**** OpenOCD failed - ensure you have installed the driver from the drivers directory, and that the debugger is not running **** In Linux this may be due to USB access permissions. In a virtual machine it may be due to USB passthrough settings. Check in the task list that another OpenOCD process is not running. Check that you have the correct target and JTAG device plugged in. ****"
 else
-	$(QUIET)$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "verify_image_checksum $(BOOTLOADER_OUTFILE).stripped$(LINK_OUTPUT_SUFFIX)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) No changes detected && $(ECHO_BLANK_LINE) || $(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "flash write_image erase $(BOOTLOADER_OUTFILE).stripped$(LINK_OUTPUT_SUFFIX)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) Download complete && $(ECHO_BLANK_LINE) || $(ECHO) "**** OpenOCD failed - ensure you have installed the driver from the drivers directory, and that the debugger is not running **** In Linux this may be due to USB access permissions. In a virtual machine it may be due to USB passthrough settings. Check in the task list that another OpenOCD process is not running. Check that you have the correct target and JTAG device plugged in. ****"
+	$(QUIET) \
+		$(eval # Verify image checksum ) \
+		$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) \
+			-f $(OPENOCD_PATH)$(JTAG).cfg \
+			-f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg \
+			-f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg \
+			-c "verify_image_checksum $(BOOTLOADER_OUTFILE).stripped$(LINK_OUTPUT_SUFFIX)" \
+			-c shutdown \
+			$(DOWNLOAD_LOG) 2>&1 && $(ECHO) No changes detected && $(ECHO_BLANK_LINE) \
+		|| \
+		$(eval # Download if checksum fails) \
+		$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) \
+			-f $(OPENOCD_PATH)$(JTAG).cfg \
+			-f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg \
+			-f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg \
+			-c "flash write_image erase $(BOOTLOADER_OUTFILE).stripped$(LINK_OUTPUT_SUFFIX)" \
+			-c shutdown \
+			$(DOWNLOAD_LOG) 2>&1 && $(ECHO) Download complete && $(ECHO_BLANK_LINE) \
+		|| \
+		$(ECHO) "**** OpenOCD failed - ensure you have installed the driver from the drivers directory, and that the debugger is not running **** In Linux this may be due to USB access permissions. In a virtual machine it may be due to USB passthrough settings. Check in the task list that another OpenOCD process is not running. Check that you have the correct target and JTAG device plugged in. ****"
 endif
 
-copy_bootloader_output_for_eclipse: build_done
+package_bootloader: bootloader display_map_summary package_dct
+	$(QUIET)$(ECHO) Packaging Bootloader ...
+	$(call ADD_TO_PACKAGE, $(BOOTLOADER_OUTFILE).stripped$(LINK_OUTPUT_SUFFIX), "mcuflash", "")
+
+#make sure apps lookup table target is done first, to avoid concurrent file access and crash on linux
+copy_bootloader_output_for_eclipse: build_done APPS_LOOKUP_TABLE_RULES
 	$(QUIET)$(call MKDIR, $(BUILD_DIR)/eclipse_debug/)
 	$(QUIET)$(CP) $(BOOTLOADER_OUTFILE)$(LINK_OUTPUT_SUFFIX) $(BUILD_DIR)/eclipse_debug/last_bootloader.elf
 
@@ -121,8 +156,14 @@ else
 	$(QUIET)$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "verify_image_checksum $(STRIPPED_LINK_DCT_FILE)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) No changes detected && $(ECHO_BLANK_LINE) || $(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "flash write_image erase $(STRIPPED_LINK_DCT_FILE)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) Download complete && $(ECHO_BLANK_LINE) || $(ECHO) "**** OpenOCD failed - ensure you have installed the driver from the drivers directory, and that the debugger is not running **** In Linux this may be due to USB access permissions. In a virtual machine it may be due to USB passthrough settings. Check in the task list that another OpenOCD process is not running. Check that you have the correct target and JTAG device plugged in. ****"
 endif
 
+package_dct: $(DCT_IMAGE_PLATFORM) display_map_summary
+	$(QUIET)$(ECHO) Packaging DCT ...
+	$(call ADD_TO_PACKAGE, $(STRIPPED_LINK_DCT_FILE), "mcuflash", "")
 else
 download_dct:
+	@:
+
+package_dct:
 	@:
 
 no_dct:
@@ -138,15 +179,31 @@ else
 	$(QUIET)$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "verify_image_checksum $(STRIPPED_LINK_OUTPUT_FILE)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) No changes detected && $(ECHO_BLANK_LINE) || $(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD)-flash-app.cfg -c "flash write_image erase $(STRIPPED_LINK_OUTPUT_FILE)" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) Download complete && $(ECHO_BLANK_LINE) || $(ECHO) "**** OpenOCD failed - ensure you have installed the driver from the drivers directory, and that the debugger is not running **** In Linux this may be due to USB access permissions. In a virtual machine it may be due to USB passthrough settings. Check in the task list that another OpenOCD process is not running. Check that you have the correct target and JTAG device plugged in. ****"
 endif
 
+package: $(RELEASE_PACKAGE)
+	$(QUIET)$(ECHO) Created package successfully
+
+$(RELEASE_PACKAGE): create_package_descriptor \
+		$(STRIPPED_LINK_OUTPUT_FILE) display_map_summary \
+		package_bootloader $(if $(findstring no_dct,$(MAKECMDGOALS)),,package_dct) package_app package_apps
+
+package_app: $(STRIPPED_LINK_OUTPUT_FILE)
+	$(QUIET)$(ECHO) Packaging Application ...
+	$(call ADD_TO_PACKAGE, $(STRIPPED_LINK_OUTPUT_FILE), "mcuflash", "")
+
 ifeq (download,$(filter download,$(MAKECMDGOALS)))
 APPS_LUT_DOWNLOAD_DEP := download
 endif
 
+ifeq (package,$(filter package,$(MAKECMDGOALS)))
+APPS_LUT_PACKAGE_DEP := package
+endif
+
 download_apps: APPS_LUT_DOWNLOAD
+package_apps: APPS_LUT_PACKAGE
 
 run: $(SHOULD_I_WAIT_FOR_DOWNLOAD)
 	$(QUIET)$(ECHO) Resetting target
-	$(QUIET)$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) -c "log_output $(OPENOCD_LOG_FILE)" -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -c init -c "reset run" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) Target running
+	$(QUIET)$(call CONV_SLASHES,$(OPENOCD_FULL_NAME)) $(OPENOCD_EXTRA_PARAMS) -f $(OPENOCD_PATH)$(JTAG).cfg -f $(OPENOCD_PATH)$(HOST_OPENOCD).cfg -c init -c "reset run" -c shutdown $(DOWNLOAD_LOG) 2>&1 && $(ECHO) Target running
 
 
 copy_output_for_eclipse: build_done copy_bootloader_output_for_eclipse

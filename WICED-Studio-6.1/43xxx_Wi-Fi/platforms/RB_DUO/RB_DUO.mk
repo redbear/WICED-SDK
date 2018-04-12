@@ -8,7 +8,7 @@
 # written permission of RedBear Corporation.
 #
 
-NAME := Platform_RB_DUO_ext
+NAME := Platform_RB_DUO
 
 WLAN_CHIP            := 43438
 WLAN_CHIP_REVISION   := A1
@@ -31,9 +31,6 @@ $(eval VALID_PLATFORMS += $(PLATFORM))
 endif # check valid platforms
 
 
-WIFI_FIRMWARE_IN_SPI_FLASH = YES
-#if YES, USES_RESOURCE_FILESYSTEM also must be define in platform_config.h
-
 VALID_BUSES := SDIO SPI
 
 ifndef BUS
@@ -42,16 +39,9 @@ endif
 
 EXTRA_TARGET_MAKEFILES +=  $(MAKEFILES_PATH)/standard_platform_targets.mk
 
-# Set the WIFI firmware in multi application file system to point to firmware
-ifeq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
-ifneq ($(APP),bootloader)
-FILESYSTEM_IMAGE = $(OUTPUT_DIR)/resources/filesystem.bin
-endif
-else
 ifeq ($(BUS),SDIO)
 INTERNAL_MEMORY_RESOURCES = $(ALL_RESOURCES)
 GLOBAL_DEFINES           += WWD_DIRECT_RESOURCES
-endif
 endif
 
 

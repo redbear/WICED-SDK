@@ -8,7 +8,7 @@
 # written permission of RedBear Corporation.
 #
 
-NAME := Platform_RB_DUO
+NAME := Platform_RB_DUO_ext
 
 WLAN_CHIP            := 43438
 WLAN_CHIP_REVISION   := A1
@@ -31,9 +31,6 @@ $(eval VALID_PLATFORMS += $(PLATFORM))
 endif # check valid platforms
 
 
-WIFI_FIRMWARE_IN_SPI_FLASH = NO
-#if YES, USES_RESOURCE_FILESYSTEM also must be define in platform_config.h
-
 VALID_BUSES := SDIO SPI
 
 ifndef BUS
@@ -42,17 +39,11 @@ endif
 
 EXTRA_TARGET_MAKEFILES +=  $(MAKEFILES_PATH)/standard_platform_targets.mk
 
-# Set the WIFI firmware in multi application file system to point to firmware
-ifeq ($(WIFI_FIRMWARE_IN_SPI_FLASH),YES)
-ifneq ($(APP),bootloader)
-FILESYSTEM_IMAGE = $(OUTPUT_DIR)/resources/filesystem.bin
-endif
-else
-ifeq ($(BUS),SDIO)
-INTERNAL_MEMORY_RESOURCES = $(ALL_RESOURCES)
-GLOBAL_DEFINES           += WWD_DIRECT_RESOURCES
-endif
-endif
+# WIFI_FIRMWARE and WIFI_FIRMWARE_CLM_BLOB are now included into resources
+# RESOURCES_LOCATION default to RESOURCES_IN_WICEDFS. But can be optionally config to RESOURCES_IN_DIRECT_RESOURCES
+# WARNING: Config RESOURCES_LOCATION to RESOURCES_IN_DIRECT_RESOURCES will build firmware and blob to into main application
+# and may cause internal flash to overflow
+RESOURCES_LOCATION ?= RESOURCES_IN_WICEDFS
 
 
 # Global includes
