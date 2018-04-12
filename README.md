@@ -7,7 +7,7 @@ The [RedBear Duo](http://redbear.cc/duo/) supports Cypress WICED WiFi SDK by add
 
 It is highly recommended you to use the RBLink for development with the Duo and WICED SDK since it is very good for debugging. However, it is also possible if you do not have the RBLink but also want to try the WICED SDK, you can use the bootloader DFU mode in this case.
 
-Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-Studio-4.1/43xxx_Wi-Fi/platforms/RB_DUO/platform.c" or "WICED-Studio-4.1/43xxx_Wi-Fi/platforms/RB_DUO_ext/platform.c":
+Moreover, with the RBLink, if you have MFi license and the CoProcessor (authenticatiuon chip), you can solder it to the RBLink, then you can try MFi projects (e.g. HomeKit). In this case, you need to manually uncomment the following code in "WICED-Studio-6.1/43xxx_Wi-Fi/platforms/RB_DUO/platform.c" or "WICED-Studio-6.1/43xxx_Wi-Fi/platforms/RB_DUO_ext/platform.c":
 
 	#if 0
 	/* MFI-related variables */
@@ -57,15 +57,15 @@ The RBLink is a MCU flash programmer/debugger for the Duo to download firmware (
 
 ## Download WICED SDK
 
-To use the Duo with WICED-Studio-5.0.1:
+To use the Duo with WICED-Studio-6.1.0:
 
 * Download Cypress WICED SDK:
 
-    * [WICED Studio 5.0.1 IDE Installer](https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation)
+    * [WICED Studio 6.1.0 IDE Installer](https://community.cypress.com/community/wiced-wifi/wiced-wifi-documentation)
 
 * Install it to your local file-system
 
-* Download and copy the `WICED-Studio-5.0` folder in this patch to where the WICED-Studio-5.0.1 is installed, replace the original files.
+* Download and copy the `WICED-Studio-6.1` folder in this patch to where the WICED-Studio-6.1.0 is installed, replace the original files.
 
 For MFi developer, you need to apply from Cypress for another SDK.
 
