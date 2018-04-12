@@ -35,10 +35,10 @@
 MEMORY
 {
 /*
-    BTLDR_OR_VECTOR_FLASH      (rx)  : ORIGIN = 0x08000000, LENGTH = 16K
+    BTLDR_OR_VECTOR_FLASH      (rx)  : ORIGIN = 0x08000000, LENGTH = 32K
 */
     DCT1_FLASH                 (rx)  : ORIGIN = 0x08008000, LENGTH = 16K
-    DCT2_FLASH                 (rx)  : ORIGIN = 0x0800000, LENGTH = 16K
+    DCT2_FLASH                 (rx)  : ORIGIN = 0x0800C000, LENGTH = 16K
     APP_FLASH                  (rx)  : ORIGIN = 0x08010000, LENGTH = 960K
     SRAM                       (rwx) : ORIGIN = 0x20000000, LENGTH = 128K
 }
